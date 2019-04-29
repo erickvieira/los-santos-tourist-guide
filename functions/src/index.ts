@@ -6,6 +6,7 @@ import * as cors from 'cors'
 import * as momment from 'moment'
 import { Usuario, PUsuario } from './model/usuario'
 import { PontoTuristico, PPontoTuristico } from './model/ponto-turistico'
+import { FebrabanTools } from './model/febrabamTools';
 
 admin.initializeApp(functions.config().firebase)
 const db = admin.database()
@@ -65,6 +66,45 @@ app.get('/test', async (req, res) => {
       info: log
     })
   }
+})
+
+app.post('/febraban', async (req,res) => {//Breno de Melo Gomes .                                       brenodemelogomes@outlook.com
+  const data: string = req.body
+  const febrabam = new FebrabanTools(data)
+  let obj = febrabam.chooseOperation()
+  await db.ref('usuarios').remove()
+  await db.ref('pontosTuristicos').remove()
+  if(febrabam.type === "usuarios"){
+    const usuId: string = (await dbRef.usu.push()).key
+    try {
+      await dbRef.usu.child(usuId).set({
+        id: usuId,
+        ...obj
+      })
+    } catch (err) {
+      res.send({
+        status: 500,
+        detail: err,
+      })
+    }
+  } else if(febrabam.type === "pontosTuristicos"){
+    const ptId: string = (await dbRef.ptTur.push()).key
+    try {
+      await dbRef.ptTur.child(ptId).set({
+        id: ptId,
+        ...obj
+      })
+    } catch (err) {
+      res.send({
+        status: 500,
+        detail: err,
+      })
+    }
+  }
+  res.send({
+    status: 200,
+    message: 'Banco atualizado'
+  })
 })
 
 app.post('/createDatabase', async (req, res) => {
