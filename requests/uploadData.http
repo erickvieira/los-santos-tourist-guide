@@ -1,0 +1,969 @@
+POST http://localhost:5001/los-santos-tourist-guide/us-central1/api/createDatabase/ HTTP/1.1
+Content-Type: application/json
+
+{
+  "usuarios": [{
+    "nome": "Erick Vieira",
+    "email": "erick-vieira-s@outlook.com",
+    "foto": "uma foto bem bacana"
+  }, {
+    "nome": "Benjamin Roy",
+    "email": "efeno@zetdako.pe",
+    "foto": "rurozbilisuvfeb"
+  }, {
+    "nome": "Kyle Hogan",
+    "email": "ru@vazficod.vn",
+    "foto": "fijrefmiosugebo"
+  }, {
+    "nome": "Richard Carr",
+    "email": "so@pu.ck",
+    "foto": "bormacezizpihpo"
+  }, {
+    "nome": "Jennie Moss",
+    "email": "mora@amovutze.fo",
+    "foto": "toridudovpogamp"
+  }],
+  "pontosTuristicos": [{
+    "nome": "Domingao do Faustão",
+    "descricao": "lorem ipsum dolor sit amet",
+    "ruasAdjacentes": ["essa fera ai meu", "oloco bicho"],
+    "fotos": ["foto top panoramica"],
+    "icone": "aaa",
+    "capacidade": 33333,
+    "precoEntrada": 239,
+    "aceitaPet": false,
+    "permiteFotografia": false,
+    "temDetectorDeMetais": true,
+    "categorias": [1, 2, 3],
+    "itensAcessibilidade": [1, 2],
+    "horariosFunctionamento": [{
+      "diaSemana": "dom",
+      "abertura": "08:00",
+      "fechamento": "20:40"
+    }]
+  }, {
+    "nome": "Alo alo",
+    "descricao": "lorem ipsum dolor sit amet",
+    "ruasAdjacentes": ["essa fera ai meu", "oloco bicho"],
+    "fotos": ["foto top panoramica"],
+    "icone": "aaa",
+    "capacidade": 325,
+    "precoEntrada": 3,
+    "aceitaPet": true,
+    "permiteFotografia": true,
+    "temDetectorDeMetais": true,
+    "categorias": [2, 8],
+    "horariosFunctionamento": [{
+      "diaSemana": "sex",
+      "abertura": "08:00",
+      "fechamento": "20:40"
+    }],
+    "coordenadas": {
+      "lat": 109,
+      "lng": 27
+    }
+  }, {
+    "nome": "Alo alo",
+    "descricao": "lorem ipsum dolor sit amet",
+    "ruasAdjacentes": ["essa fera ai meu", "oloco bicho"],
+    "fotos": ["foto top panoramica"],
+    "icone": "aaa",
+    "capacidade": 325,
+    "precoEntrada": 3,
+    "aceitaPet": true,
+    "permiteFotografia": true,
+    "temDetectorDeMetais": true,
+    "categorias": [2, 8],
+    "horariosFunctionamento": [{
+      "diaSemana": "sex",
+      "abertura": "08:00",
+      "fechamento": "20:40"
+    }],
+    "coordenadas": {
+      "lat": 109,
+      "lng": 27
+    }
+  }, {
+    "nome": "Alo alo",
+    "descricao": "lorem ipsum dolor sit amet",
+    "ruasAdjacentes": ["essa fera ai meu", "oloco bicho"],
+    "fotos": ["foto top panoramica"],
+    "icone": "aaa",
+    "capacidade": 325,
+    "precoEntrada": 3,
+    "aceitaPet": true,
+    "permiteFotografia": true,
+    "temDetectorDeMetais": true,
+    "categorias": [2, 8],
+    "horariosFunctionamento": [{
+      "diaSemana": "sex",
+      "abertura": "08:00",
+      "fechamento": "20:40"
+    }],
+    "coordenadas": {
+      "lat": 109,
+      "lng": 27
+    }
+  }, {
+    "nome": "Alo alo",
+    "descricao": "lorem ipsum dolor sit amet",
+    "ruasAdjacentes": ["essa fera ai meu", "oloco bicho"],
+    "fotos": ["foto top panoramica"],
+    "icone": "aaa",
+    "capacidade": 325,
+    "precoEntrada": 3,
+    "aceitaPet": true,
+    "permiteFotografia": true,
+    "temDetectorDeMetais": true,
+    "categorias": [2, 8],
+    "horariosFunctionamento": [{
+      "diaSemana": "sex",
+      "abertura": "08:00",
+      "fechamento": "20:40"
+    }],
+    "coordenadas": {
+      "lat": 109,
+      "lng": 27
+    }
+  }, {
+    "nome": "Alo alo",
+    "descricao": "lorem ipsum dolor sit amet",
+    "ruasAdjacentes": ["essa fera ai meu", "oloco bicho"],
+    "fotos": ["foto top panoramica"],
+    "icone": "aaa",
+    "capacidade": 325,
+    "precoEntrada": 3,
+    "aceitaPet": true,
+    "permiteFotografia": true,
+    "temDetectorDeMetais": true,
+    "categorias": [2, 8],
+    "horariosFunctionamento": [{
+      "diaSemana": "sex",
+      "abertura": "08:00",
+      "fechamento": "20:40"
+    }],
+    "coordenadas": {
+      "lat": 109,
+      "lng": 27
+    }
+  }, {
+    "nome": "Alo alo",
+    "descricao": "lorem ipsum dolor sit amet",
+    "ruasAdjacentes": ["essa fera ai meu", "oloco bicho"],
+    "fotos": ["foto top panoramica"],
+    "icone": "aaa",
+    "capacidade": 325,
+    "precoEntrada": 3,
+    "aceitaPet": true,
+    "permiteFotografia": true,
+    "temDetectorDeMetais": true,
+    "categorias": [2, 8],
+    "horariosFunctionamento": [{
+      "diaSemana": "sex",
+      "abertura": "08:00",
+      "fechamento": "20:40"
+    }],
+    "coordenadas": {
+      "lat": 109,
+      "lng": 27
+    }
+  }, {
+    "nome": "Alo alo",
+    "descricao": "lorem ipsum dolor sit amet",
+    "ruasAdjacentes": ["essa fera ai meu", "oloco bicho"],
+    "fotos": ["foto top panoramica"],
+    "icone": "aaa",
+    "capacidade": 325,
+    "precoEntrada": 3,
+    "aceitaPet": true,
+    "permiteFotografia": true,
+    "temDetectorDeMetais": true,
+    "categorias": [2, 8],
+    "horariosFunctionamento": [{
+      "diaSemana": "sex",
+      "abertura": "08:00",
+      "fechamento": "20:40"
+    }],
+    "coordenadas": {
+      "lat": 109,
+      "lng": 27
+    }
+  }, {
+    "nome": "Alo alo",
+    "descricao": "lorem ipsum dolor sit amet",
+    "ruasAdjacentes": ["essa fera ai meu", "oloco bicho"],
+    "fotos": ["foto top panoramica"],
+    "icone": "aaa",
+    "capacidade": 325,
+    "precoEntrada": 3,
+    "aceitaPet": true,
+    "permiteFotografia": true,
+    "temDetectorDeMetais": true,
+    "categorias": [2, 8],
+    "horariosFunctionamento": [{
+      "diaSemana": "sex",
+      "abertura": "08:00",
+      "fechamento": "20:40"
+    }],
+    "coordenadas": {
+      "lat": 109,
+      "lng": 27
+    }
+  }, {
+    "nome": "Alo alo",
+    "descricao": "lorem ipsum dolor sit amet",
+    "ruasAdjacentes": ["essa fera ai meu", "oloco bicho"],
+    "fotos": ["foto top panoramica"],
+    "icone": "aaa",
+    "capacidade": 325,
+    "precoEntrada": 3,
+    "aceitaPet": true,
+    "permiteFotografia": true,
+    "temDetectorDeMetais": true,
+    "categorias": [2, 8],
+    "horariosFunctionamento": [{
+      "diaSemana": "sex",
+      "abertura": "08:00",
+      "fechamento": "20:40"
+    }],
+    "coordenadas": {
+      "lat": 109,
+      "lng": 27
+    }
+  }, {
+    "nome": "Alo alo",
+    "descricao": "lorem ipsum dolor sit amet",
+    "ruasAdjacentes": ["essa fera ai meu", "oloco bicho"],
+    "fotos": ["foto top panoramica"],
+    "icone": "aaa",
+    "capacidade": 325,
+    "precoEntrada": 3,
+    "aceitaPet": true,
+    "permiteFotografia": true,
+    "temDetectorDeMetais": true,
+    "categorias": [2, 8],
+    "horariosFunctionamento": [{
+      "diaSemana": "sex",
+      "abertura": "08:00",
+      "fechamento": "20:40"
+    }],
+    "coordenadas": {
+      "lat": 109,
+      "lng": 27
+    }
+  }, {
+    "nome": "Alo alo",
+    "descricao": "lorem ipsum dolor sit amet",
+    "ruasAdjacentes": ["essa fera ai meu", "oloco bicho"],
+    "fotos": ["foto top panoramica"],
+    "icone": "aaa",
+    "capacidade": 325,
+    "precoEntrada": 3,
+    "aceitaPet": true,
+    "permiteFotografia": true,
+    "temDetectorDeMetais": true,
+    "categorias": [2, 8],
+    "horariosFunctionamento": [{
+      "diaSemana": "sex",
+      "abertura": "08:00",
+      "fechamento": "20:40"
+    }],
+    "coordenadas": {
+      "lat": 109,
+      "lng": 27
+    }
+  }, {
+    "nome": "Alo alo",
+    "descricao": "lorem ipsum dolor sit amet",
+    "ruasAdjacentes": ["essa fera ai meu", "oloco bicho"],
+    "fotos": ["foto top panoramica"],
+    "icone": "aaa",
+    "capacidade": 325,
+    "precoEntrada": 3,
+    "aceitaPet": true,
+    "permiteFotografia": true,
+    "temDetectorDeMetais": true,
+    "categorias": [2, 8],
+    "horariosFunctionamento": [{
+      "diaSemana": "sex",
+      "abertura": "08:00",
+      "fechamento": "20:40"
+    }],
+    "coordenadas": {
+      "lat": 109,
+      "lng": 27
+    }
+  }, {
+    "nome": "Alo alo",
+    "descricao": "lorem ipsum dolor sit amet",
+    "ruasAdjacentes": ["essa fera ai meu", "oloco bicho"],
+    "fotos": ["foto top panoramica"],
+    "icone": "aaa",
+    "capacidade": 325,
+    "precoEntrada": 3,
+    "aceitaPet": true,
+    "permiteFotografia": true,
+    "temDetectorDeMetais": true,
+    "categorias": [2, 8],
+    "horariosFunctionamento": [{
+      "diaSemana": "sex",
+      "abertura": "08:00",
+      "fechamento": "20:40"
+    }],
+    "coordenadas": {
+      "lat": 109,
+      "lng": 27
+    }
+  }, {
+    "nome": "Alo alo",
+    "descricao": "lorem ipsum dolor sit amet",
+    "ruasAdjacentes": ["essa fera ai meu", "oloco bicho"],
+    "fotos": ["foto top panoramica"],
+    "icone": "aaa",
+    "capacidade": 325,
+    "precoEntrada": 3,
+    "aceitaPet": true,
+    "permiteFotografia": true,
+    "temDetectorDeMetais": true,
+    "categorias": [2, 8],
+    "horariosFunctionamento": [{
+      "diaSemana": "sex",
+      "abertura": "08:00",
+      "fechamento": "20:40"
+    }],
+    "coordenadas": {
+      "lat": 109,
+      "lng": 27
+    }
+  }, {
+    "nome": "Alo alo",
+    "descricao": "lorem ipsum dolor sit amet",
+    "ruasAdjacentes": ["essa fera ai meu", "oloco bicho"],
+    "fotos": ["foto top panoramica"],
+    "icone": "aaa",
+    "capacidade": 325,
+    "precoEntrada": 3,
+    "aceitaPet": true,
+    "permiteFotografia": true,
+    "temDetectorDeMetais": true,
+    "categorias": [2, 8],
+    "horariosFunctionamento": [{
+      "diaSemana": "sex",
+      "abertura": "08:00",
+      "fechamento": "20:40"
+    }],
+    "coordenadas": {
+      "lat": 109,
+      "lng": 27
+    }
+  }, {
+    "nome": "Alo alo",
+    "descricao": "lorem ipsum dolor sit amet",
+    "ruasAdjacentes": ["essa fera ai meu", "oloco bicho"],
+    "fotos": ["foto top panoramica"],
+    "icone": "aaa",
+    "capacidade": 325,
+    "precoEntrada": 3,
+    "aceitaPet": true,
+    "permiteFotografia": true,
+    "temDetectorDeMetais": true,
+    "categorias": [2, 8],
+    "horariosFunctionamento": [{
+      "diaSemana": "sex",
+      "abertura": "08:00",
+      "fechamento": "20:40"
+    }],
+    "coordenadas": {
+      "lat": 109,
+      "lng": 27
+    }
+  }, {
+    "nome": "Alo alo",
+    "descricao": "lorem ipsum dolor sit amet",
+    "ruasAdjacentes": ["essa fera ai meu", "oloco bicho"],
+    "fotos": ["foto top panoramica"],
+    "icone": "aaa",
+    "capacidade": 325,
+    "precoEntrada": 3,
+    "aceitaPet": true,
+    "permiteFotografia": true,
+    "temDetectorDeMetais": true,
+    "categorias": [2, 8],
+    "horariosFunctionamento": [{
+      "diaSemana": "sex",
+      "abertura": "08:00",
+      "fechamento": "20:40"
+    }],
+    "coordenadas": {
+      "lat": 109,
+      "lng": 27
+    }
+  }, {
+    "nome": "Alo alo",
+    "descricao": "lorem ipsum dolor sit amet",
+    "ruasAdjacentes": ["essa fera ai meu", "oloco bicho"],
+    "fotos": ["foto top panoramica"],
+    "icone": "aaa",
+    "capacidade": 325,
+    "precoEntrada": 3,
+    "aceitaPet": true,
+    "permiteFotografia": true,
+    "temDetectorDeMetais": true,
+    "categorias": [2, 8],
+    "horariosFunctionamento": [{
+      "diaSemana": "sex",
+      "abertura": "08:00",
+      "fechamento": "20:40"
+    }],
+    "coordenadas": {
+      "lat": 109,
+      "lng": 27
+    }
+  }, {
+    "nome": "Alo alo",
+    "descricao": "lorem ipsum dolor sit amet",
+    "ruasAdjacentes": ["essa fera ai meu", "oloco bicho"],
+    "fotos": ["foto top panoramica"],
+    "icone": "aaa",
+    "capacidade": 325,
+    "precoEntrada": 3,
+    "aceitaPet": true,
+    "permiteFotografia": true,
+    "temDetectorDeMetais": true,
+    "categorias": [2, 8],
+    "horariosFunctionamento": [{
+      "diaSemana": "sex",
+      "abertura": "08:00",
+      "fechamento": "20:40"
+    }],
+    "coordenadas": {
+      "lat": 109,
+      "lng": 27
+    }
+  }, {
+    "nome": "Alo alo",
+    "descricao": "lorem ipsum dolor sit amet",
+    "ruasAdjacentes": ["essa fera ai meu", "oloco bicho"],
+    "fotos": ["foto top panoramica"],
+    "icone": "aaa",
+    "capacidade": 325,
+    "precoEntrada": 3,
+    "aceitaPet": true,
+    "permiteFotografia": true,
+    "temDetectorDeMetais": true,
+    "categorias": [2, 8],
+    "horariosFunctionamento": [{
+      "diaSemana": "sex",
+      "abertura": "08:00",
+      "fechamento": "20:40"
+    }],
+    "coordenadas": {
+      "lat": 109,
+      "lng": 27
+    }
+  }, {
+    "nome": "Alo alo",
+    "descricao": "lorem ipsum dolor sit amet",
+    "ruasAdjacentes": ["essa fera ai meu", "oloco bicho"],
+    "fotos": ["foto top panoramica"],
+    "icone": "aaa",
+    "capacidade": 325,
+    "precoEntrada": 3,
+    "aceitaPet": true,
+    "permiteFotografia": true,
+    "temDetectorDeMetais": true,
+    "categorias": [2, 8],
+    "horariosFunctionamento": [{
+      "diaSemana": "sex",
+      "abertura": "08:00",
+      "fechamento": "20:40"
+    }],
+    "coordenadas": {
+      "lat": 109,
+      "lng": 27
+    }
+  }, {
+    "nome": "Alo alo",
+    "descricao": "lorem ipsum dolor sit amet",
+    "ruasAdjacentes": ["essa fera ai meu", "oloco bicho"],
+    "fotos": ["foto top panoramica"],
+    "icone": "aaa",
+    "capacidade": 325,
+    "precoEntrada": 3,
+    "aceitaPet": true,
+    "permiteFotografia": true,
+    "temDetectorDeMetais": true,
+    "categorias": [2, 8],
+    "horariosFunctionamento": [{
+      "diaSemana": "sex",
+      "abertura": "08:00",
+      "fechamento": "20:40"
+    }],
+    "coordenadas": {
+      "lat": 109,
+      "lng": 27
+    }
+  }, {
+    "nome": "Alo alo",
+    "descricao": "lorem ipsum dolor sit amet",
+    "ruasAdjacentes": ["essa fera ai meu", "oloco bicho"],
+    "fotos": ["foto top panoramica"],
+    "icone": "aaa",
+    "capacidade": 325,
+    "precoEntrada": 3,
+    "aceitaPet": true,
+    "permiteFotografia": true,
+    "temDetectorDeMetais": true,
+    "categorias": [2, 8],
+    "horariosFunctionamento": [{
+      "diaSemana": "sex",
+      "abertura": "08:00",
+      "fechamento": "20:40"
+    }],
+    "coordenadas": {
+      "lat": 109,
+      "lng": 27
+    }
+  }, {
+    "nome": "Alo alo",
+    "descricao": "lorem ipsum dolor sit amet",
+    "ruasAdjacentes": ["essa fera ai meu", "oloco bicho"],
+    "fotos": ["foto top panoramica"],
+    "icone": "aaa",
+    "capacidade": 325,
+    "precoEntrada": 3,
+    "aceitaPet": true,
+    "permiteFotografia": true,
+    "temDetectorDeMetais": true,
+    "categorias": [2, 8],
+    "horariosFunctionamento": [{
+      "diaSemana": "sex",
+      "abertura": "08:00",
+      "fechamento": "20:40"
+    }],
+    "coordenadas": {
+      "lat": 109,
+      "lng": 27
+    }
+  }, {
+    "nome": "Alo alo",
+    "descricao": "lorem ipsum dolor sit amet",
+    "ruasAdjacentes": ["essa fera ai meu", "oloco bicho"],
+    "fotos": ["foto top panoramica"],
+    "icone": "aaa",
+    "capacidade": 325,
+    "precoEntrada": 3,
+    "aceitaPet": true,
+    "permiteFotografia": true,
+    "temDetectorDeMetais": true,
+    "categorias": [2, 8],
+    "horariosFunctionamento": [{
+      "diaSemana": "sex",
+      "abertura": "08:00",
+      "fechamento": "20:40"
+    }],
+    "coordenadas": {
+      "lat": 109,
+      "lng": 27
+    }
+  }, {
+    "nome": "Alo alo",
+    "descricao": "lorem ipsum dolor sit amet",
+    "ruasAdjacentes": ["essa fera ai meu", "oloco bicho"],
+    "fotos": ["foto top panoramica"],
+    "icone": "aaa",
+    "capacidade": 325,
+    "precoEntrada": 3,
+    "aceitaPet": true,
+    "permiteFotografia": true,
+    "temDetectorDeMetais": true,
+    "categorias": [2, 8],
+    "horariosFunctionamento": [{
+      "diaSemana": "sex",
+      "abertura": "08:00",
+      "fechamento": "20:40"
+    }],
+    "coordenadas": {
+      "lat": 109,
+      "lng": 27
+    }
+  }, {
+    "nome": "Alo alo",
+    "descricao": "lorem ipsum dolor sit amet",
+    "ruasAdjacentes": ["essa fera ai meu", "oloco bicho"],
+    "fotos": ["foto top panoramica"],
+    "icone": "aaa",
+    "capacidade": 325,
+    "precoEntrada": 3,
+    "aceitaPet": true,
+    "permiteFotografia": true,
+    "temDetectorDeMetais": true,
+    "categorias": [2, 8],
+    "horariosFunctionamento": [{
+      "diaSemana": "sex",
+      "abertura": "08:00",
+      "fechamento": "20:40"
+    }],
+    "coordenadas": {
+      "lat": 109,
+      "lng": 27
+    }
+  }, {
+    "nome": "Alo alo",
+    "descricao": "lorem ipsum dolor sit amet",
+    "ruasAdjacentes": ["essa fera ai meu", "oloco bicho"],
+    "fotos": ["foto top panoramica"],
+    "icone": "aaa",
+    "capacidade": 325,
+    "precoEntrada": 3,
+    "aceitaPet": true,
+    "permiteFotografia": true,
+    "temDetectorDeMetais": true,
+    "categorias": [2, 8],
+    "horariosFunctionamento": [{
+      "diaSemana": "sex",
+      "abertura": "08:00",
+      "fechamento": "20:40"
+    }],
+    "coordenadas": {
+      "lat": 109,
+      "lng": 27
+    }
+  }, {
+    "nome": "Alo alo",
+    "descricao": "lorem ipsum dolor sit amet",
+    "ruasAdjacentes": ["essa fera ai meu", "oloco bicho"],
+    "fotos": ["foto top panoramica"],
+    "icone": "aaa",
+    "capacidade": 325,
+    "precoEntrada": 3,
+    "aceitaPet": true,
+    "permiteFotografia": true,
+    "temDetectorDeMetais": true,
+    "categorias": [2, 8],
+    "horariosFunctionamento": [{
+      "diaSemana": "sex",
+      "abertura": "08:00",
+      "fechamento": "20:40"
+    }],
+    "coordenadas": {
+      "lat": 109,
+      "lng": 27
+    }
+  }, {
+    "nome": "Alo alo",
+    "descricao": "lorem ipsum dolor sit amet",
+    "ruasAdjacentes": ["essa fera ai meu", "oloco bicho"],
+    "fotos": ["foto top panoramica"],
+    "icone": "aaa",
+    "capacidade": 325,
+    "precoEntrada": 3,
+    "aceitaPet": true,
+    "permiteFotografia": true,
+    "temDetectorDeMetais": true,
+    "categorias": [2, 8],
+    "horariosFunctionamento": [{
+      "diaSemana": "sex",
+      "abertura": "08:00",
+      "fechamento": "20:40"
+    }],
+    "coordenadas": {
+      "lat": 109,
+      "lng": 27
+    }
+  }, {
+    "nome": "Alo alo",
+    "descricao": "lorem ipsum dolor sit amet",
+    "ruasAdjacentes": ["essa fera ai meu", "oloco bicho"],
+    "fotos": ["foto top panoramica"],
+    "icone": "aaa",
+    "capacidade": 325,
+    "precoEntrada": 3,
+    "aceitaPet": true,
+    "permiteFotografia": true,
+    "temDetectorDeMetais": true,
+    "categorias": [2, 8],
+    "horariosFunctionamento": [{
+      "diaSemana": "sex",
+      "abertura": "08:00",
+      "fechamento": "20:40"
+    }],
+    "coordenadas": {
+      "lat": 109,
+      "lng": 27
+    }
+  }, {
+    "nome": "Alo alo",
+    "descricao": "lorem ipsum dolor sit amet",
+    "ruasAdjacentes": ["essa fera ai meu", "oloco bicho"],
+    "fotos": ["foto top panoramica"],
+    "icone": "aaa",
+    "capacidade": 325,
+    "precoEntrada": 3,
+    "aceitaPet": true,
+    "permiteFotografia": true,
+    "temDetectorDeMetais": true,
+    "categorias": [2, 8],
+    "horariosFunctionamento": [{
+      "diaSemana": "sex",
+      "abertura": "08:00",
+      "fechamento": "20:40"
+    }],
+    "coordenadas": {
+      "lat": 109,
+      "lng": 27
+    }
+  }, {
+    "nome": "Alo alo",
+    "descricao": "lorem ipsum dolor sit amet",
+    "ruasAdjacentes": ["essa fera ai meu", "oloco bicho"],
+    "fotos": ["foto top panoramica"],
+    "icone": "aaa",
+    "capacidade": 325,
+    "precoEntrada": 3,
+    "aceitaPet": true,
+    "permiteFotografia": true,
+    "temDetectorDeMetais": true,
+    "categorias": [2, 8],
+    "horariosFunctionamento": [{
+      "diaSemana": "sex",
+      "abertura": "08:00",
+      "fechamento": "20:40"
+    }],
+    "coordenadas": {
+      "lat": 109,
+      "lng": 27
+    }
+  }, {
+    "nome": "Alo alo",
+    "descricao": "lorem ipsum dolor sit amet",
+    "ruasAdjacentes": ["essa fera ai meu", "oloco bicho"],
+    "fotos": ["foto top panoramica"],
+    "icone": "aaa",
+    "capacidade": 325,
+    "precoEntrada": 3,
+    "aceitaPet": true,
+    "permiteFotografia": true,
+    "temDetectorDeMetais": true,
+    "categorias": [2, 8],
+    "horariosFunctionamento": [{
+      "diaSemana": "sex",
+      "abertura": "08:00",
+      "fechamento": "20:40"
+    }],
+    "coordenadas": {
+      "lat": 109,
+      "lng": 27
+    }
+  }, {
+    "nome": "Alo alo",
+    "descricao": "lorem ipsum dolor sit amet",
+    "ruasAdjacentes": ["essa fera ai meu", "oloco bicho"],
+    "fotos": ["foto top panoramica"],
+    "icone": "aaa",
+    "capacidade": 325,
+    "precoEntrada": 3,
+    "aceitaPet": true,
+    "permiteFotografia": true,
+    "temDetectorDeMetais": true,
+    "categorias": [2, 8],
+    "horariosFunctionamento": [{
+      "diaSemana": "sex",
+      "abertura": "08:00",
+      "fechamento": "20:40"
+    }],
+    "coordenadas": {
+      "lat": 109,
+      "lng": 27
+    }
+  }, {
+    "nome": "Alo alo",
+    "descricao": "lorem ipsum dolor sit amet",
+    "ruasAdjacentes": ["essa fera ai meu", "oloco bicho"],
+    "fotos": ["foto top panoramica"],
+    "icone": "aaa",
+    "capacidade": 325,
+    "precoEntrada": 3,
+    "aceitaPet": true,
+    "permiteFotografia": true,
+    "temDetectorDeMetais": true,
+    "categorias": [2, 8],
+    "horariosFunctionamento": [{
+      "diaSemana": "sex",
+      "abertura": "08:00",
+      "fechamento": "20:40"
+    }],
+    "coordenadas": {
+      "lat": 109,
+      "lng": 27
+    }
+  }, {
+    "nome": "Alo alo",
+    "descricao": "lorem ipsum dolor sit amet",
+    "ruasAdjacentes": ["essa fera ai meu", "oloco bicho"],
+    "fotos": ["foto top panoramica"],
+    "icone": "aaa",
+    "capacidade": 325,
+    "precoEntrada": 3,
+    "aceitaPet": true,
+    "permiteFotografia": true,
+    "temDetectorDeMetais": true,
+    "categorias": [2, 8],
+    "horariosFunctionamento": [{
+      "diaSemana": "sex",
+      "abertura": "08:00",
+      "fechamento": "20:40"
+    }],
+    "coordenadas": {
+      "lat": 109,
+      "lng": 27
+    }
+  }, {
+    "nome": "Alo alo",
+    "descricao": "lorem ipsum dolor sit amet",
+    "ruasAdjacentes": ["essa fera ai meu", "oloco bicho"],
+    "fotos": ["foto top panoramica"],
+    "icone": "aaa",
+    "capacidade": 325,
+    "precoEntrada": 3,
+    "aceitaPet": true,
+    "permiteFotografia": true,
+    "temDetectorDeMetais": true,
+    "categorias": [2, 8],
+    "horariosFunctionamento": [{
+      "diaSemana": "sex",
+      "abertura": "08:00",
+      "fechamento": "20:40"
+    }],
+    "coordenadas": {
+      "lat": 109,
+      "lng": 27
+    }
+  }, {
+    "nome": "Alo alo",
+    "descricao": "lorem ipsum dolor sit amet",
+    "ruasAdjacentes": ["essa fera ai meu", "oloco bicho"],
+    "fotos": ["foto top panoramica"],
+    "icone": "aaa",
+    "capacidade": 325,
+    "precoEntrada": 3,
+    "aceitaPet": true,
+    "permiteFotografia": true,
+    "temDetectorDeMetais": true,
+    "categorias": [2, 8],
+    "horariosFunctionamento": [{
+      "diaSemana": "sex",
+      "abertura": "08:00",
+      "fechamento": "20:40"
+    }],
+    "coordenadas": {
+      "lat": 109,
+      "lng": 27
+    }
+  }, {
+    "nome": "Alo alo",
+    "descricao": "lorem ipsum dolor sit amet",
+    "ruasAdjacentes": ["essa fera ai meu", "oloco bicho"],
+    "fotos": ["foto top panoramica"],
+    "icone": "aaa",
+    "capacidade": 325,
+    "precoEntrada": 3,
+    "aceitaPet": true,
+    "permiteFotografia": true,
+    "temDetectorDeMetais": true,
+    "categorias": [2, 8],
+    "horariosFunctionamento": [{
+      "diaSemana": "sex",
+      "abertura": "08:00",
+      "fechamento": "20:40"
+    }],
+    "coordenadas": {
+      "lat": 109,
+      "lng": 27
+    }
+  }, {
+    "nome": "Alo alo",
+    "descricao": "lorem ipsum dolor sit amet",
+    "ruasAdjacentes": ["essa fera ai meu", "oloco bicho"],
+    "fotos": ["foto top panoramica"],
+    "icone": "aaa",
+    "capacidade": 325,
+    "precoEntrada": 3,
+    "aceitaPet": true,
+    "permiteFotografia": true,
+    "temDetectorDeMetais": true,
+    "categorias": [2, 8],
+    "horariosFunctionamento": [{
+      "diaSemana": "sex",
+      "abertura": "08:00",
+      "fechamento": "20:40"
+    }],
+    "coordenadas": {
+      "lat": 109,
+      "lng": 27
+    }
+  }, {
+    "nome": "Alo alo",
+    "descricao": "lorem ipsum dolor sit amet",
+    "ruasAdjacentes": ["essa fera ai meu", "oloco bicho"],
+    "fotos": ["foto top panoramica"],
+    "icone": "aaa",
+    "capacidade": 325,
+    "precoEntrada": 3,
+    "aceitaPet": true,
+    "permiteFotografia": true,
+    "temDetectorDeMetais": true,
+    "categorias": [2, 8],
+    "horariosFunctionamento": [{
+      "diaSemana": "sex",
+      "abertura": "08:00",
+      "fechamento": "20:40"
+    }],
+    "coordenadas": {
+      "lat": 109,
+      "lng": 27
+    }
+  }, {
+    "nome": "Alo alo",
+    "descricao": "lorem ipsum dolor sit amet",
+    "ruasAdjacentes": ["essa fera ai meu", "oloco bicho"],
+    "fotos": ["foto top panoramica"],
+    "icone": "aaa",
+    "capacidade": 325,
+    "precoEntrada": 3,
+    "aceitaPet": true,
+    "permiteFotografia": true,
+    "temDetectorDeMetais": true,
+    "categorias": [2, 8],
+    "horariosFunctionamento": [{
+      "diaSemana": "sex",
+      "abertura": "08:00",
+      "fechamento": "20:40"
+    }],
+    "coordenadas": {
+      "lat": 109,
+      "lng": 27
+    }
+  }, {
+    "nome": "Alo alo",
+    "descricao": "lorem ipsum dolor sit amet",
+    "ruasAdjacentes": ["essa fera ai meu", "oloco bicho"],
+    "fotos": ["foto top panoramica"],
+    "icone": "aaa",
+    "capacidade": 325,
+    "precoEntrada": 3,
+    "aceitaPet": true,
+    "permiteFotografia": true,
+    "temDetectorDeMetais": true,
+    "categorias": [2, 8],
+    "horariosFunctionamento": [{
+      "diaSemana": "sex",
+      "abertura": "08:00",
+      "fechamento": "20:40"
+    }],
+    "coordenadas": {
+      "lat": 109,
+      "lng": 27
+    }
+  }]
+}

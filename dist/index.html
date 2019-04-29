@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Welcome to Firebase Hosting</title>
+
+    <!-- update the version number as needed -->
+    <script defer src="/__/firebase/5.9.4/firebase-app.js"></script>
+    <!-- include only the Firebase features as you need -->
+    <script defer src="/__/firebase/5.9.4/firebase-auth.js"></script>
+    <script defer src="/__/firebase/5.9.4/firebase-database.js"></script>
+    <script defer src="/__/firebase/5.9.4/firebase-messaging.js"></script>
+    <script defer src="/__/firebase/5.9.4/firebase-storage.js"></script>
+    <!-- initialize the SDK after all desired features are loaded -->
+    <script defer src="/__/firebase/init.js"></script>
+
+    <style media="screen">
+      
+    </style>
+  </head>
+  <body>
+    <div class="quadro">
+      <form id="form-data">
+        <label for="json-data"></label>
+        <textarea id="json-data" 
+          rows="20"
+          name="data" 
+          type="text">
+        </textarea>
+        <button id="btn-send" type="button">Enviar</button>
+      </form>
+    </div>
+
+    <script>
+      document.addEventListener('DOMContentLoaded', function() {
+        // // 🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥
+        // // The Firebase SDK is initialized and available here!
+        //
+        // firebase.auth().onAuthStateChanged(user => { });
+        // firebase.database().ref('/path/to/ref').on('value', snapshot => { });
+        // firebase.messaging().requestPermission().then(() => { });
+        // firebase.storage().ref('/path/to/ref').getDownloadURL().then(() => { });
+        //
+        // // 🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥
+        function doPost(url, body, onSuccess, onFailure) {
+          if (url && onSuccess && onFailure) {
+            let http = new XMLHttpRequest();
+            http.onreadystatechange = () => {
+              if (http.readyState === XMLHttpRequest.DONE) {
+                if (http.status === 200) {
+                  if (typeof onSuccess == 'function') onSuccess(http.responseText);
+                } else {
+                  if (typeof onFailure == 'function') onFailure(http.responseText);
+                }
+              }
+            };
+            http.open('POST', url, true);
+            http.setRequestHeader("Content-Type", "application/json");
+            http.send(body);
+          }
+        }
+
+        document.getElementById('btn-send').addEventListener('click', sendData);
+
+        function sendData(event) {
+          event.preventDefault();
+          event.stopPropagation();
+          const form = document.getElementById('form-data');
+          console.log(event);
+          doPost(
+            'http://localhost:5001/los-santos-tourist-guide/us-central1/api/createDatabase/',
+            form.data.value.toString(),
+            () => {
+              alert("[ ✓ ] Banco atualizado com sucesso!");
+            }, 
+            (err) => {
+              alert("[ ✗ ] Erro durante a atualização do banco!!!")
+            }
+          );
+        }
+
+        try {
+          let app = firebase.app();
+          let features = ['auth', 'database', 'messaging', 'storage'].filter(feature => typeof app[feature] === 'function');
+          document.getElementById('load').innerHTML = `Firebase SDK loaded with ${features.join(', ')}`;
+        } catch (e) {
+          console.error(e);
+          document.getElementById('load').innerHTML = 'Error loading the Firebase SDK, check the console.';
+        }
+      });
+    </script>
+  </body>
+</html>
