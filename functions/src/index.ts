@@ -4,6 +4,7 @@ import * as express from 'express'
 import * as bodyParser from 'body-parser'
 import * as cors from 'cors'
 import * as momment from 'moment'
+import * as xml2js from 'xml2js'
 import { Usuario, PUsuario } from './model/usuario'
 import { PontoTuristico, PPontoTuristico } from './model/ponto-turistico'
 
@@ -116,6 +117,85 @@ app.post('/createDatabase', async (req, res) => {
     status: 200,
     message: 'Banco atualizado'
   })
+})
+
+app.post('/createDatabaseFromXML', async (req, res) => {
+  try {
+    const rawXml = await (new Promise<{ 
+      usuarios: PUsuario[],
+      pontosTuristicos: PPontoTuristico[],
+    }>((resolve, reject) => {
+      xml2js.parseString(req.body, async (err: any, result: any) => {
+        if (err) {
+          await db.ref('usuarios').remove()
+          await db.ref('pontosTuristicos').remove()
+          await db.ref('usuarios').push(result.usuarios)
+          await db.ref('pontosTuristicos').push(result.pontosTuristicos)
+          reject(err)
+        }
+        if (result) {
+          await db.ref('usuarios').remove()
+          await db.ref('pontosTuristicos').remove()
+          await db.ref('usuarios').push(result.usuarios)
+          await db.ref('pontosTuristicos').push(result.pontosTuristicos)
+          resolve(result)
+        }
+      })
+    }))
+    const data: { 
+      usuarios: PUsuario[],
+      pontosTuristicos: PPontoTuristico[],
+    } = rawXml
+    if (data == undefined) {
+      res.send({
+        status: 500,
+        message: 'nenhum dado informado',
+        detail: data
+      })
+    }
+    await db.ref('log').push(data)
+    await db.ref('usuarios').remove()
+    await db.ref('pontosTuristicos').remove()
+    for (const usuData of data.usuarios) {
+      const usuId: string = (await dbRef.usu.push()).key
+      const usuario: Usuario = Object.assign({
+        id: usuId
+      }, usuData)
+      try {
+        await dbRef.usu.child(usuId).set(usuario)
+      } catch (err) {
+        res.send({
+          status: 500,
+          detail: err,
+        })
+        break
+      }
+    }
+    for (const ptData of data.pontosTuristicos) {
+      const ptId: string = (await dbRef.ptTur.push()).key
+      const pontoTuristico: PontoTuristico = Object.assign({
+        id: ptId,
+      }, ptData)
+      try {
+        await dbRef.ptTur.child(ptId).set(pontoTuristico)
+      } catch (err) {
+        res.send({
+          status: 500,
+          detail: err,
+        })
+        break
+      }
+    }
+    res.send({
+      status: 200,
+      message: 'Banco atualizado'
+    })
+  } catch (err) {
+    res.send({
+      status: 500,
+      detail: err,
+    })
+  }
 })
 
 export const api = functions.https.onRequest(app)
