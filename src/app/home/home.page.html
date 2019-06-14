@@ -1,14 +1,14 @@
 <ion-header>
   <ion-toolbar>
     <ion-title>
-      Ionic Blank
+      Los Santos Tourist Guide
     </ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
-  <div class="ion-padding">
-    The world is your oyster.
-    <p>If you get lost, the <a target="_blank" rel="noopener" href="https://ionicframework.com/docs/">docs</a> will be your guide.</p>
-  </div>
+  <overlay-map 
+    img="../../assets/imgs/los-santos.svg"
+    [markers]="[{ lat: 12, lng: 16 }, { lat: -22, lng: 20 }]">
+  </overlay-map>
 </ion-content>
