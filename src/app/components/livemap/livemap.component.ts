@@ -21,6 +21,11 @@ export class LivemapComponent implements OnInit {
         zoom: 14,
         center: { lat: 33.738177, lng: -118.813650 },
         mapTypeId: google.maps.MapTypeId.ROADMAP,
+        fullscreenControl: false,
+        zoomControl: false,
+        disableDefaultUI: true,
+        disableDoubleClickZoom: true,
+        streetViewControl: false
       });
       const bounds = new google.maps.LatLngBounds(
         new google.maps.LatLng(33.709254, -118.855531),
