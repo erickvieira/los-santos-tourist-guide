@@ -5,7 +5,7 @@ import * as bodyParser from 'body-parser'
 import * as cors from 'cors'
 import * as momment from 'moment'
 import { User, IUser } from './models/user'
-import { PontoTuristico, IPontoTuristico } from './models/ponto-turistico'
+import { TouristSpot, ITouristSpot } from './models/tourist-spot'
 
 admin.initializeApp(functions.config().firebase)
 const db = admin.database()
@@ -70,7 +70,7 @@ app.get('/healthcheck', async (req, res) => {
 app.post('/createDatabase', async (req, res) => {
   const data: { 
     usuarios: IUser[],
-    pontosTuristicos: IPontoTuristico[],
+    pontosTuristicos: ITouristSpot[],
   } = req.body
   if (data == undefined) {
     res.send({
@@ -99,7 +99,7 @@ app.post('/createDatabase', async (req, res) => {
   }
   for (const ptData of data.pontosTuristicos) {
     const ptId: string = (await dbRef.ptTur.push()).key
-    const pontoTuristico: PontoTuristico = Object.assign({
+    const pontoTuristico: TouristSpot = Object.assign({
       id: ptId,
     }, ptData)
     try {
