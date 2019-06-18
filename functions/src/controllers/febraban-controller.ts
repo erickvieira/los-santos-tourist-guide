@@ -1,20 +1,20 @@
 export class FebrabanTools {
   lines: any[] = [];
-  type: string = ""
-  
+  type = '';
+
   constructor(public source: string) {}
 
   chooseOperation = () => {
     let result: any = {};
-    this.lines = this.source.split("\n");
+    this.lines = this.source.split('\n');
     switch (this.lines[0]) {
-      case "010":
+      case '010':
         result = this.registeruser();
-        this.type = "usuarios"
+        this.type = 'usuarios';
         break;
-      case "020":
+      case '020':
         result = this.registerTouristSpot();
-        this.type = "pontosTuristicos"
+        this.type = 'pontosTuristicos';
         break;
     //   case "030":
     //     result = this.rateTuristicSpot();
@@ -24,11 +24,11 @@ export class FebrabanTools {
     //     break;
     }
     return result;
-  };
+  }
 
   registeruser = (): any => {
-    let nome = "";
-    let email = "";
+    let nome = '';
+    let email = '';
     for (let i = 0; i < this.lines[1].length; i++) {
       if (i < 60) {
         nome += this.lines[1].charAt(i);
@@ -38,22 +38,22 @@ export class FebrabanTools {
     }
     console.log(nome);
     console.log(email);
-    //salvar no banco
+    // salvar no banco
     return { nome, email };
-  };
+  }
 
   registerTouristSpot = () => {
-    let user = "";
-    let Nome = "";
-    let Descricao = "";
-    let Latitude = "";
-    let Longitude = "";
-    let HorarioDeFuncionamento = "";
-    let FaixaEtaria = "";
-    let PermitePet = "";
-    let PermiteTirarFoto = "";
-    let Categoria = "";
-    let FaixaDePreco = "";
+    let user = '';
+    let Nome = '';
+    let Descricao = '';
+    let Latitude = '';
+    let Longitude = '';
+    let HorarioDeFuncionamento = '';
+    let FaixaEtaria = '';
+    let PermitePet = '';
+    let PermiteTirarFoto = '';
+    let Categoria = '';
+    let FaixaDePreco = '';
     for (let i = 0; i < this.lines[1].length; i++) {
       if (i < 20) {
         user += this.lines[1].charAt(i);
@@ -94,7 +94,7 @@ export class FebrabanTools {
     console.log(`PermiteTirarFoto: ${PermiteTirarFoto}`);
     console.log(`Categoria: ${Categoria}`);
     console.log(`FaixaDePreco: ${FaixaDePreco}`);
-    //salvar no banco
+    // salvar no banco
     return {
       user,
       Nome,
@@ -108,12 +108,12 @@ export class FebrabanTools {
       Categoria,
       FaixaDePreco
     };
-  };
+  }
 
   rateTuristicSpot = () => {
-    let user = "";
-    let turisticSpot = "";
-    let rate = "";
+    let user = '';
+    let turisticSpot = '';
+    let rate = '';
 
     for (let i = 0; i < this.lines[1].length; i++) {
       if (i < 20) {
@@ -134,11 +134,11 @@ export class FebrabanTools {
     console.log(turisticSpot);
     console.log(rate);
     return { user, turisticSpot, rate };
-  };
+  }
 
   favoritTuristicSpot = () => {
-    let user = "";
-    let turisticSpot = "";
+    let user = '';
+    let turisticSpot = '';
 
     for (let i = 0; i < this.lines[1].length; i++) {
       if (i < 20) {
@@ -153,5 +153,5 @@ export class FebrabanTools {
     console.log(user);
     console.log(turisticSpot);
     return { user, turisticSpot };
-  };
+  }
 }

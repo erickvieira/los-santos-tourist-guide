@@ -1,5 +1,5 @@
 export interface Rating {
-  checkin: number,
-  rate: number,
-  comment?: string,
+  checkin: number;
+  rate: number;
+  comment?: string;
 }

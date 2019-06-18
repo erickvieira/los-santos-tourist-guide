@@ -7,6 +7,6 @@ export class UserController extends GenericController<User> {
   constructor(
     dbRef: admin.database.Reference,
     loggerRef?: admin.database.Reference,
-  ) { super(dbRef, loggerRef) }
+  ) { super(dbRef, loggerRef); }
 
 }

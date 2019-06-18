@@ -1,109 +1,110 @@
-import * as functions from 'firebase-functions'
-import * as admin from 'firebase-admin'
-import * as express from 'express'
-import * as bodyParser from 'body-parser'
-import * as cors from 'cors'
+import { TouristSpotController } from './controllers/tourist-spot.controller';
+import * as functions from 'firebase-functions';
+import * as admin from 'firebase-admin';
+import * as express from 'express';
+import * as bodyParser from 'body-parser';
+import * as cors from 'cors';
 import { User } from './models/user';
-import { TouristSpot } from './models/tourist-spot';
-import { UserController } from './controllers/user.controller';
+import { TouristSpot, TinyTouristSpot } from './models/tourist-spot';
 
-admin.initializeApp(functions.config().firebase)
-const db = admin.database()
+admin.initializeApp({
+  credential: admin.credential.applicationDefault(),
+  databaseURL: 'https://los-santos-tourist-guide.firebaseio.com'
+});
+const db = admin.database();
 
 const dbRef = Object.freeze({
   usr: db.ref('users'),
   ts: db.ref('touristspots'),
   log: db.ref('logs'),
-} as { [key: string]: admin.database.Reference })
+} as { [key: string]: admin.database.Reference });
 
-// const userCtrl = new UserController(dbRef.usr, dbRef.log)
-const tsCtrl = new UserController(dbRef.ts, dbRef.log)
+const tsCtrl = new TouristSpotController(dbRef.ts, dbRef.log);
 
-const app = express()
-app.use(cors())
-app.use(bodyParser.json())
+const app = express();
+app.use(cors());
+app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({
   extended: true
-}))
-app.options('*', cors())
+}));
+app.options('*', cors());
 
-const tudoOk = Object.freeze({
-  message: 'Ta tudo certo aqui, taoquêi?',
-  version: '1.0.0',
-  status: 200
-})
+const ok = Object.freeze({
+  message: 'It\'s alright here, tall key?',
+  version: '1.1.1'
+});
 
 app.get('/', (_, res) => {
-  res.send(tudoOk)
-})
+  res.status(200).send(ok);
+});
 
 app.get('/healthcheck', (_, res) => {
-  res.send(tudoOk)
-})
+  res.sendStatus(200);
+});
 
 app.post('/createDatabase', async (req, res) => {
-  const data: { 
+  const data: {
     users: [],
     touristspots: [],
-  } = req.body
+  } = req.body;
   if (!data || !data.users || !data.touristspots) {
-    res.send({
-      status: 500,
-      message: 'no data provided',
-      detail: data
-    })
+    res.status(500).send({
+      error: 'no provided data'
+    });
   }
-  // await db.ref('log').push(data)
-  // await db.ref('users').remove()
-  // await db.ref('touristspots').remove()
-  for (let usuData of data.users) {
-    const usuId: string = (await dbRef.usr.push()).key
+  try {
+    await dbRef.ts.remove();
+    await dbRef.usr.remove();
+  } catch (error) {
+    console.error(error);
+  }
+  for (const usuData of data.users) {
+    const usuId: string = (await dbRef.usr.push()).key;
     const user: User = Object.assign({
       id: usuId
-    }, usuData)
+    }, usuData);
     try {
-      await dbRef.usr.child(usuId).set(user)
-      if (data.users.indexOf(usuData) === data.users.length - 1) {
-        break
-      }
-    } catch (err) {
-      res.send({
-        status: 500,
-        detail: err,
-      })
-      break
+      await dbRef.usr.child(usuId).set(user);
+    } catch (error) {
+      res.status(500).send({ error });
+      break;
     }
   }
-  for (let tsData of data.touristspots) {
-    const tsId: string = (await dbRef.ts.push()).key
+  for (const tsData of data.touristspots) {
+    const tsId: string = (await dbRef.ts.push()).key;
     const touristSpot: TouristSpot = Object.assign({
       id: tsId,
-    }, tsData)
+    }, tsData);
     try {
-      await dbRef.ts.child(tsId).set(touristSpot)
-      if (data.touristspots.indexOf(tsData) === data.touristspots.length - 1) {
-        break
-      }
-    } catch (err) {
-      res.send({
-        status: 500,
-        detail: err,
-      })
-      break
+      await dbRef.ts.child(tsId).set(touristSpot);
+    } catch (error) {
+      res.status(500).send({ error });
+      break;
     }
   }
-  res.send({
-    status: 200,
+  res.status(201).send({
     message: 'updated data base'
-  })
-})
+  });
+});
 
-app.get('/spot/:id', (req, res) => {
-  res.send(tsCtrl.getOne(req.params.id))
-})
+app.get('/spot/:id', async (req, res) => {
+  try {
+    const result: TouristSpot = await tsCtrl.getOne(req.params.id);
+    res.send(result);
+  } catch (error) {
+    res.status(404).send({ error });
+  }
+});
 
-app.get('/spot', (_, res) => {
-  res.send(tsCtrl.list())
-})
+app.get('/spot', async (_, res) => {
+  try {
+    const list: TinyTouristSpot[] = await tsCtrl.getTinyList();
+    if (list && list.length > 0) {
+      res.send(list);
+    }
+  } catch (error) {
+    res.status(404).send({ error });
+  }
+});
 
-export const api = functions.https.onRequest(app)
+export const api = functions.https.onRequest(app);

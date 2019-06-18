@@ -1,7 +1,7 @@
 import { ITouristSpot } from './tourist-spot';
 import { IUser } from './user';
 export interface FirebaeObjectReference {
-  readonly id: string
+  readonly id: string;
 }
 
-export type Entity = IUser | ITouristSpot
+export type Entity = IUser | ITouristSpot;

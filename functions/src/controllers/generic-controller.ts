@@ -14,41 +14,59 @@ export class GenericController<T> {
                 method,
                 error,
                 checkin: moment.now(),
-            })
+            });
         }
     }
 
-    async list(searchBy?: { key: string, value: string }): Promise<any> {
+    async getList(searchBy?: { key: string, value: string }): Promise<T[]> {
+        const list: T[] = [];
+        const handleResult = async (snapshot: admin.database.DataSnapshot) => {
+            if (snapshot.exists()) {
+                await snapshot.forEach(data => {
+                    list.push(data.val());
+                });
+                return list;
+            } else {
+                throw(Error(`the required list has no items`));
+            }
+        };
         if (searchBy) {
-            return (
-                await this.dbRef.orderByChild(searchBy.key).equalTo(searchBy.value).once('value')
-            ).val();
+            const snapshot = await this.dbRef.orderByChild(
+                searchBy.key
+            ).equalTo(searchBy.value).once('value');
+            return await handleResult(snapshot);
         } else {
-            return (await this.dbRef.orderByChild('id').once('value')).val()
+            const snapshot = await this.dbRef.orderByPriority().once('value');
+            return await handleResult(snapshot);
         }
     }
 
-    async getOne(id: string): Promise<T[]> {
-        return (await this.dbRef.child(id).once('value')).val();
+    async getOne(id: string): Promise<T> {
+        const snapshot = await this.dbRef.child(id).once('value');
+        if (snapshot.exists()) {
+            return snapshot.val();
+        } else {
+            throw Error(`id #${id} not found`);
+        }
     }
 
     async insert(data: T) {
-        const id: string = (await this.dbRef.push()).key
+        const id: string = (await this.dbRef.push()).key;
         try {
             await this.dbRef.child(id).set({
                 id,
                 ...data
-            })
+            });
         } catch (err) {
-            this.log('insert', err)
+            this.log('insert', err);
         }
     }
 
     async delete(id: string) {
         try {
-            await this.dbRef.child(id).remove()
+            await this.dbRef.child(id).remove();
         } catch (err) {
-            this.log('insert', err)
+            this.log('insert', err);
         }
     }
 
@@ -57,9 +75,9 @@ export class GenericController<T> {
             await this.dbRef.child(id).set({
                 id,
                 ...data
-            })
+            });
         } catch (err) {
-            this.log('insert', err)
+            this.log('insert', err);
         }
     }
 

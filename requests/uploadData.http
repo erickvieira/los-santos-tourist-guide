@@ -1,4 +1,4 @@
-POST http://localhost:5001/los-santos-tourist-guide/us-central1/api/createDatabase HTTP/1.1
+POST http://localhost:5000/los-santos-tourist-guide/us-central1/api/createDatabase HTTP/1.1
 Content-Type: application/json
 
 {
@@ -36,4 +36,4 @@ Content-Type: application/json
   }]
 }
 
-GET https://us-central1-los-santos-tourist-guide.cloudfunctions.net/api/spot/ HTTP/1.1
+GET https://us-central1-los-santos-tourist-guide.cloudfunctions.net/api/spot HTTP/1.1
