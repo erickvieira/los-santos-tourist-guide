@@ -13,6 +13,11 @@ export class LivemapComponent implements OnInit {
   @Input('markers') markers: Array<google.maps.LatLng> = [];
   overlay: any = undefined;
 
+  points = [
+    { lat: 33.738177, lng: -118.813650 },
+    { lat: 33.738877, lng: -118.827654 }
+  ]
+
   constructor() { }
 
   ngOnInit() {
@@ -32,7 +37,16 @@ export class LivemapComponent implements OnInit {
         new google.maps.LatLng(33.812495, -118.767535)
       );
       this.overlay = new USGSOverlay(bounds, this.srcImage, map);
+
+      this.markers.forEach(marker => {
+        new google.maps.Marker({
+          position: marker,
+          map: map
+        });
+      });
     });
+
+    
   }
 
 }
