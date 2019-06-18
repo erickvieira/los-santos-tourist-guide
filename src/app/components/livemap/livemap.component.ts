@@ -40,7 +40,7 @@ export class LivemapComponent implements OnInit {
 
       this.markers.forEach(marker => {
         new google.maps.Marker({
-          position: new google.maps.LatLng(marker.lat, marker.lng),
+          position: marker,
           map: map
         });
       });
