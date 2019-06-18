@@ -3,18 +3,21 @@ import * as admin from 'firebase-admin'
 import * as express from 'express'
 import * as bodyParser from 'body-parser'
 import * as cors from 'cors'
-import * as momment from 'moment'
-import { User, IUser } from './models/user'
-import { TouristSpot, ITouristSpot } from './models/tourist-spot'
+import { User } from './models/user';
+import { TouristSpot } from './models/tourist-spot';
+import { UserController } from './controllers/user.controller';
 
 admin.initializeApp(functions.config().firebase)
 const db = admin.database()
 
 const dbRef = Object.freeze({
-  usu: db.ref('usuarios'),
-  ptTur: db.ref('pontosTuristicos'),
-  fav: db.ref('favoritacoes'),
+  usr: db.ref('users'),
+  ts: db.ref('touristspots'),
+  log: db.ref('logs'),
 } as { [key: string]: admin.database.Reference })
+
+// const userCtrl = new UserController(dbRef.usr, dbRef.log)
+const tsCtrl = new UserController(dbRef.ts, dbRef.log)
 
 const app = express()
 app.use(cors())
@@ -26,6 +29,7 @@ app.options('*', cors())
 
 const tudoOk = Object.freeze({
   message: 'Ta tudo certo aqui, taoquêi?',
+  version: '1.0.0',
   status: 200
 })
 
@@ -33,62 +37,35 @@ app.get('/', (_, res) => {
   res.send(tudoOk)
 })
 
-app.get('/status', (_, res) => {
+app.get('/healthcheck', (_, res) => {
   res.send(tudoOk)
-})
-
-app.get('/healthcheck', async (req, res) => {
-  const message = req.query.message
-  if (message == undefined) {
-    res.send({
-      status: 500,
-      message: 'impossivel cadastrar uma mensagem vazia',
-    })
-  }
-  const key = (await db.ref('/log').push()).key
-  const log = {
-    id: key,
-    checkin: momment.now(),
-    message
-  }
-  try {
-    await db.ref(`/log`).child(key).set(log)
-    res.send({
-      status: 200,
-      message: 'cadastro efetuado'
-    })
-  } catch (err) {
-    res.send({
-      status: 500,
-      message: 'erro',
-      detail: err,
-      info: log
-    })
-  }
 })
 
 app.post('/createDatabase', async (req, res) => {
   const data: { 
-    usuarios: IUser[],
-    pontosTuristicos: ITouristSpot[],
+    users: [],
+    touristspots: [],
   } = req.body
-  if (data == undefined) {
+  if (!data || !data.users || !data.touristspots) {
     res.send({
       status: 500,
-      message: 'nenhum dado informado',
+      message: 'no data provided',
       detail: data
     })
   }
-  await db.ref('log').push(data)
-  await db.ref('usuarios').remove()
-  await db.ref('pontosTuristicos').remove()
-  for (const usuData of data.usuarios) {
-    const usuId: string = (await dbRef.usu.push()).key
-    const usuario: User = Object.assign({
+  // await db.ref('log').push(data)
+  // await db.ref('users').remove()
+  // await db.ref('touristspots').remove()
+  for (let usuData of data.users) {
+    const usuId: string = (await dbRef.usr.push()).key
+    const user: User = Object.assign({
       id: usuId
     }, usuData)
     try {
-      await dbRef.usu.child(usuId).set(usuario)
+      await dbRef.usr.child(usuId).set(user)
+      if (data.users.indexOf(usuData) === data.users.length - 1) {
+        break
+      }
     } catch (err) {
       res.send({
         status: 500,
@@ -97,13 +74,16 @@ app.post('/createDatabase', async (req, res) => {
       break
     }
   }
-  for (const ptData of data.pontosTuristicos) {
-    const ptId: string = (await dbRef.ptTur.push()).key
-    const pontoTuristico: TouristSpot = Object.assign({
-      id: ptId,
-    }, ptData)
+  for (let tsData of data.touristspots) {
+    const tsId: string = (await dbRef.ts.push()).key
+    const touristSpot: TouristSpot = Object.assign({
+      id: tsId,
+    }, tsData)
     try {
-      await dbRef.ptTur.child(ptId).set(pontoTuristico)
+      await dbRef.ts.child(tsId).set(touristSpot)
+      if (data.touristspots.indexOf(tsData) === data.touristspots.length - 1) {
+        break
+      }
     } catch (err) {
       res.send({
         status: 500,
@@ -114,8 +94,16 @@ app.post('/createDatabase', async (req, res) => {
   }
   res.send({
     status: 200,
-    message: 'Banco atualizado'
+    message: 'updated data base'
   })
+})
+
+app.get('/spot/:id', (req, res) => {
+  res.send(tsCtrl.getOne(req.params.id))
+})
+
+app.get('/spot', (_, res) => {
+  res.send(tsCtrl.list())
 })
 
 export const api = functions.https.onRequest(app)

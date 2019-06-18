@@ -1,0 +1,19 @@
+{
+  "users": [{
+    "name": "Erick Vieira",
+    "email": "erick-vieira-s@outlook.com",
+    "profilePicture": "uma foto bem bacana"
+  }],
+  "touristspots": [{
+    "name": "Maze Bank",
+    "description": "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Rerum repellat iure eligendi autem impedit corrupti fugiat repudiandae incidunt, aspernatur dignissimos totam deleniti eaque qui ab eveniet beatae obcaecati asperiores enim!",
+    "adjacentStreets": ["Groove Street", "Lincoln Avenue"],
+    "icon": "none",
+    "ticketPrice": "free",
+    "allowsPhotography": true,
+    "hasMetalDetector": true,
+    "categories": [ "business" ],
+    "businessHours": [{ "day": "sun", "opensAt": "08:00", "closesAt": "19:00" }],
+    "coordinates": { "lat": 33.738177, "lng": -118.813650 }
+  }]
+}

@@ -18,14 +18,14 @@ export class GenericController<T> {
         }
     }
 
-    async list(searchBy?: { key: string, value: string }): Promise<T[]> {
+    async list(searchBy?: { key: string, value: string }): Promise<any> {
         if (searchBy) {
             return (
                 await this.dbRef.orderByChild(searchBy.key).equalTo(searchBy.value).once('value')
             ).val();
-        } else return (
-            await this.dbRef.orderByChild('id').once('value')
-        ).val();
+        } else {
+            return (await this.dbRef.orderByChild('id').once('value')).val()
+        }
     }
 
     async getOne(id: string): Promise<T[]> {
