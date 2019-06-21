@@ -30,6 +30,6 @@ export interface ITouristSpot {
 export interface TinyTouristSpot {
   id: string;
   name: string;
-  categories: Categories;
+  categories: Categories[];
   coordinates: Coordinates;
 }

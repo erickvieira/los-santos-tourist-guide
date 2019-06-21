@@ -12,12 +12,7 @@ export class TouristSpotController extends GenericController<TouristSpot> {
   async getTinyList(searchBy?: { key: string, value: string }): Promise<TinyTouristSpot[]> {
     const touristSpots = await super.getList(searchBy);
     return [].map.call(touristSpots, (touristSpot: TouristSpot) => {
-      return {
-        id: touristSpot.id,
-        name: touristSpot.name,
-        coordinates: touristSpot.coordinates,
-        categories: touristSpot.categories,
-      };
+      return { ...touristSpot } as TinyTouristSpot;
     }) as TinyTouristSpot[];
   }
 

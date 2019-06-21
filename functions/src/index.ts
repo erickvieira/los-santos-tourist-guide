@@ -6,18 +6,19 @@ import * as bodyParser from 'body-parser';
 import * as cors from 'cors';
 import { User } from './models/user';
 import { TouristSpot, TinyTouristSpot } from './models/tourist-spot';
+import * as env from '../environment/environment';
 
 admin.initializeApp({
-  credential: admin.credential.applicationDefault(),
+  credential: admin.credential.cert(JSON.stringify(env.adminSdkKey)),
   databaseURL: 'https://los-santos-tourist-guide.firebaseio.com'
 });
 const db = admin.database();
 
-const dbRef = Object.freeze({
+const dbRef: { [key: string]: admin.database.Reference } = Object.freeze({
   usr: db.ref('users'),
   ts: db.ref('touristspots'),
   log: db.ref('logs'),
-} as { [key: string]: admin.database.Reference });
+});
 
 const tsCtrl = new TouristSpotController(dbRef.ts, dbRef.log);
 
@@ -31,7 +32,7 @@ app.options('*', cors());
 
 const ok = Object.freeze({
   message: 'It\'s alright here, tall key?',
-  version: '1.1.1'
+  version: '1.2.0 - banana'
 });
 
 app.get('/', (_, res) => {
