@@ -10,7 +10,11 @@ export class TouristSpotService {
 
   constructor(private http: HttpClient) {}
 
-  getSome(): Observable<TouristSpot[]> {
+  getTouristSpots(): Observable<TouristSpot[]> {
     return this.http.get<TouristSpot[]>('https://us-central1-los-santos-tourist-guide.cloudfunctions.net/api/spot/')
+  }
+
+  getTouristSpot(spotId: number): Observable<TouristSpot> {
+    return this.http.get<TouristSpot>('https://us-central1-los-santos-tourist-guide.cloudfunctions.net/api/spot/' + spotId);
   }
 }

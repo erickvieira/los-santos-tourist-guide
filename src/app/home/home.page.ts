@@ -14,7 +14,7 @@ export class HomePage implements OnInit {
   constructor(private touristSpot: TouristSpotService) {}
 
   ngOnInit() {
-    this.touristSpot.getSome()
+    this.touristSpot.getTouristSpots()
       .subscribe((data) => {
         this.spots = data;
       });
