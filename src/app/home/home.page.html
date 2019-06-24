@@ -6,7 +6,7 @@
   </ion-toolbar>
 </ion-header>
 
-<app-toolbar-menu></app-toolbar-menu>
+<app-toolbar-menu (onSelectCategory)="onSelectCategory($event)" ></app-toolbar-menu>
 
 <ion-content>
   <overlay-map 

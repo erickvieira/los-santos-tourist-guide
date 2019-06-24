@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 
 @Component({
   selector: 'app-toolbar-menu',
@@ -7,8 +7,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ToolbarMenuComponent implements OnInit {
 
+  @Output() onSelectCategory = new EventEmitter();
+
   constructor() { }
 
   ngOnInit() {}
+
+  onGetPoints(categoryName: string) {
+    this.onSelectCategory.emit({'category': categoryName});
+  }
 
 }
