@@ -1,26 +1,15 @@
 import { TouristSpotController } from './controllers/tourist-spot.controller';
 import * as functions from 'firebase-functions';
-import * as admin from 'firebase-admin';
 import * as express from 'express';
 import * as bodyParser from 'body-parser';
 import * as cors from 'cors';
-import { User } from './models/user';
 import { TouristSpot, TinyTouristSpot } from './models/tourist-spot';
-import * as env from '../environment/environment';
+import { UserController } from './controllers/user.controller';
+import { User } from './models/user';
+// import * as env from '../environment/environment';
 
-admin.initializeApp({
-  credential: admin.credential.cert(JSON.stringify(env.adminSdkKey)),
-  databaseURL: 'https://los-santos-tourist-guide.firebaseio.com'
-});
-const db = admin.database();
-
-const dbRef: { [key: string]: admin.database.Reference } = Object.freeze({
-  usr: db.ref('users'),
-  ts: db.ref('touristspots'),
-  log: db.ref('logs'),
-});
-
-const tsCtrl = new TouristSpotController(dbRef.ts, dbRef.log);
+const tsCtrl = new TouristSpotController('touristspots', 'logs');
+const usrCtrl = new UserController('users', 'logs');
 
 const app = express();
 app.use(cors());
@@ -32,7 +21,7 @@ app.options('*', cors());
 
 const ok = Object.freeze({
   message: 'It\'s alright here, tall key?',
-  version: '1.2.0 - banana'
+  version: '1.5.3'
 });
 
 app.get('/', (_, res) => {
@@ -43,49 +32,52 @@ app.get('/healthcheck', (_, res) => {
   res.sendStatus(200);
 });
 
-app.post('/createDatabase', async (req, res) => {
-  const data: {
-    users: [],
-    touristspots: [],
-  } = req.body;
-  if (!data || !data.users || !data.touristspots) {
-    res.status(500).send({
-      error: 'no provided data'
-    });
-  }
+app.get('/user/:id', async (req, res) => {
   try {
-    await dbRef.ts.remove();
-    await dbRef.usr.remove();
+    const result: User = await usrCtrl.getOne(req.params.id);
+    res.send(result);
   } catch (error) {
-    console.error(error);
+    res.status(404).send({ error });
   }
-  for (const usuData of data.users) {
-    const usuId: string = (await dbRef.usr.push()).key;
-    const user: User = Object.assign({
-      id: usuId
-    }, usuData);
-    try {
-      await dbRef.usr.child(usuId).set(user);
-    } catch (error) {
-      res.status(500).send({ error });
-      break;
-    }
+});
+
+app.post('/user', async (req, res) => {
+  try {
+    await usrCtrl.insert(
+      { ...req.body, role: 'app' } as User,
+      [ req.body.email ]
+    );
+    res.send(200);
+  } catch (error) {
+    res.status(404).send({ error });
   }
-  for (const tsData of data.touristspots) {
-    const tsId: string = (await dbRef.ts.push()).key;
-    const touristSpot: TouristSpot = Object.assign({
-      id: tsId,
-    }, tsData);
-    try {
-      await dbRef.ts.child(tsId).set(touristSpot);
-    } catch (error) {
-      res.status(500).send({ error });
-      break;
-    }
+});
+
+app.delete('/user/:id', async (req, res) => {
+  try {
+    await usrCtrl.update(req.params.id, { active: false });
+    res.send(200);
+  } catch (error) {
+    res.status(404).send({ error });
   }
-  res.status(201).send({
-    message: 'updated data base'
-  });
+});
+
+app.post('/user/:id/promote', async (req, res) => {
+  try {
+    await usrCtrl.update(req.params.id, { role: 'admin' });
+    res.send(200);
+  } catch (error) {
+    res.status(404).send({ error });
+  }
+});
+
+app.post('/user/:id/demote', async (req, res) => {
+  try {
+    await usrCtrl.update(req.params.id, { role: 'app' });
+    res.send(200);
+  } catch (error) {
+    res.status(404).send({ error });
+  }
 });
 
 app.get('/spot/:id', async (req, res) => {
@@ -97,15 +89,63 @@ app.get('/spot/:id', async (req, res) => {
   }
 });
 
+app.post('/spot', async (req, res) => {
+  try {
+    await tsCtrl.insert(
+      req.body as TouristSpot,
+      [ req.body.name, JSON.stringify(req.body.coordinates) ]
+    );
+    res.send(200);
+  } catch (error) {
+    res.status(404).send({ error });
+  }
+});
+
 app.get('/spot', async (_, res) => {
   try {
     const list: TinyTouristSpot[] = await tsCtrl.getTinyList();
     if (list && list.length > 0) {
       res.send(list);
+    } else {
+      res.status(404).send({ error: { message: 'no items found' } });
     }
   } catch (error) {
     res.status(404).send({ error });
   }
 });
 
-export const api = functions.https.onRequest(app);
+app.get('/spot/category/:name', async (req, res) => {
+  try {
+    const list: TinyTouristSpot[] = await tsCtrl.getTinyListByCategory(req.params.name);
+    if (list && list.length > 0) {
+      res.send(list);
+    } else {
+      res.status(404).send({ error: { message: 'no items found' } });
+    }
+  } catch (error) {
+    res.status(404).send({ error });
+  }
+});
+
+app.delete('/spot/:id', async (req, res) => {
+  try {
+    await tsCtrl.delete(req.params.id);
+    res.send(200);
+  } catch (error) {
+    res.status(404).send({ error });
+  }
+});
+
+app.patch('/spot/:id', async (req, res) => {
+  try {
+    await tsCtrl.update(req.params.id, req.body as TouristSpot);
+    res.send(200);
+  } catch (error) {
+    res.status(404).send({ error });
+  }
+});
+
+export const tgapi = functions.runWith({
+  timeoutSeconds: 20,
+  memory: '256MB'
+}).https.onRequest(app);

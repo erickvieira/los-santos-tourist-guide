@@ -6,9 +6,13 @@ export enum Categories {
   BUSINESS = 'business',
   RACING = 'racing',
   AVIATION = 'aviation',
-  NAUTICAL = 'náutical',
+  NAUTICAL = 'nautical',
   SOCIALIZING = 'socializing',
   SHOPPING = 'shopping',
-  PUBLIC = 'públic',
-  PRIVATE = 'private',
+  PUBLIC = 'public area',
+  PRIVATE = 'private area',
 }
+
+export const categoriesToArray = () => {
+  return Object.keys(Categories).filter((key: any) => typeof Categories[key] === 'string');
+};

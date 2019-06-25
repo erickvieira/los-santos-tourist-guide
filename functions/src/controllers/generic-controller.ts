@@ -1,84 +1,107 @@
 import * as admin from 'firebase-admin';
 import * as moment from 'moment';
+import * as request from 'request';
 
 export class GenericController<T> {
 
-    constructor(
-        private dbRef: admin.database.Reference,
-        private loggerRef?: admin.database.Reference,
-    ) { }
+  protected loggerRef: admin.database.Reference;
+  protected dbRef: admin.database.Reference;
+  private bdUrl = 'https://los-santos-tourist-guide.firebaseio.com';
 
-    private async log(method: string, error: unknown) {
-        if (this.loggerRef) {
-            await this.loggerRef.push({
-                method,
-                error,
-                checkin: moment.now(),
-            });
-        }
+  constructor(
+    private tableName: string,
+    logger?: string,
+  ) {
+    if (admin.apps.length === 0) {
+      admin.initializeApp({
+        // credential: admin.credential.cert(serviceAccount()),
+        credential: admin.credential.applicationDefault(),
+        projectId: 'los-santos-tourist-guide',
+        databaseURL: 'https://los-santos-tourist-guide.firebaseio.com'
+      });
     }
+    this.dbRef = admin.database().ref(tableName);
+    this.loggerRef = admin.database().ref(logger);
+  }
 
-    async getList(searchBy?: { key: string, value: string }): Promise<T[]> {
-        const list: T[] = [];
-        const handleResult = async (snapshot: admin.database.DataSnapshot) => {
-            if (snapshot.exists()) {
-                await snapshot.forEach(data => {
-                    list.push(data.val());
-                });
-                return list;
-            } else {
-                throw(Error(`the required list has no items`));
-            }
-        };
-        if (searchBy) {
-            const snapshot = await this.dbRef.orderByChild(
-                searchBy.key
-            ).equalTo(searchBy.value).once('value');
-            return await handleResult(snapshot);
+  async getList(): Promise<T[]> {
+    return new Promise<T[]>((resolve, reject) => {
+      request(`${this.bdUrl}/${this.tableName}.json`, (err, res: any) => {
+        if (err) {
+          reject(err);
         } else {
-            const snapshot = await this.dbRef.orderByPriority().once('value');
-            return await handleResult(snapshot);
+          resolve([].map.call(Object.values(JSON.parse(res.body)), (v: T) => {
+            return v;
+          }) as T[]);
         }
-    }
+      });
+    });
+  }
 
-    async getOne(id: string): Promise<T> {
-        const snapshot = await this.dbRef.child(id).once('value');
-        if (snapshot.exists()) {
-            return snapshot.val();
+  async getOne(id: string): Promise<T> {
+    return new Promise<T>((resolve, reject) => {
+      request(`${this.bdUrl}/${this.tableName}/${id}.json`, (err, res: any) => {
+        if (err) {
+          reject(err);
         } else {
-            throw Error(`id #${id} not found`);
+          resolve(JSON.parse(res.body));
         }
-    }
+      });
+    });
+  }
 
-    async insert(data: T) {
-        const id: string = (await this.dbRef.push()).key;
-        try {
-            await this.dbRef.child(id).set({
-                id,
-                ...data
-            });
-        } catch (err) {
-            this.log('insert', err);
-        }
+  async insert(data: T, keyCompose: string[]) {
+    let id = ``;
+    if (!keyCompose || keyCompose.length === 0) {
+      throw Error('enter a valid keyCompose argument');
     }
+    keyCompose.forEach(key => {
+      id += ` ${key} `;
+    });
+    id = btoa(`${id} at ${moment.now()}`);
+    try {
+      await this.getOne(id);
+      throw Error('this value is already in database / key violation');
+    } catch (err) {
+      console.error(err);
+    }
+    return new Promise<void>((resolve, reject) => {
+      request.put(`${this.bdUrl}/${this.tableName}/${id}.json`, {
+        json: { ...data, id }
+      }, (err) => {
+        if (err) {
+          reject(err);
+        } else {
+          resolve();
+        }
+      });
+    });
+  }
 
-    async delete(id: string) {
-        try {
-            await this.dbRef.child(id).remove();
-        } catch (err) {
-            this.log('insert', err);
+  async delete(id: string) {
+    return new Promise<void>((resolve, reject) => {
+      request.delete(`${this.bdUrl}/${this.tableName}/${id}.json`, (err) => {
+        if (err) {
+          reject(err);
+        } else {
+          resolve();
         }
-    }
+      });
+    });
+  }
 
-    async update(id: string, data: T) {
-        try {
-            await this.dbRef.child(id).set({
-                id,
-                ...data
-            });
-        } catch (err) {
-            this.log('insert', err);
+  async update(id: string, data: T | any) {
+    return new Promise<void>((resolve, reject) => {
+      request.patch(`${this.bdUrl}/${this.tableName}/${id}.json`, {
+        json: data
+      }, (err) => {
+        if (err) {
+          reject(err);
+        } else {
+          resolve();
         }
-    }
+      });
+    });
+  }
 
 }
