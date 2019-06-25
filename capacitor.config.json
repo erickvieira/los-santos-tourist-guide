@@ -1,0 +1,7 @@
+{
+  "appId": "app.web.lossantostouristguide",
+  "appName": "los-santos-tourist-guide",
+  "bundledWebRuntime": false,
+  "npmClient": "npm",
+  "webDir": "www"
+}

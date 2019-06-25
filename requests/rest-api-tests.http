@@ -1,0 +1,80 @@
+POST http://localhost:5000/los-santos-tourist-guide/us-central1/tgapi/createDatabase HTTP/1.1
+# POST https://us-central1-los-santos-tourist-guide.cloudfunctions.net/tgapi/createDatabase HTTP/1.1
+Content-Type: application/json
+
+{
+  "users": [{
+    "name": "Erick Vieira",
+    "email": "erick-vieira-s@outlook.com"
+  }, {
+    "name": "Breno de Melo",
+    "email": "brenodmelogomes@outlook.com"
+  }, {
+    "name": "Rafael Reis",
+    "email": "rafareisbr@gmail.com"
+  }],
+  "touristspots": [{
+    "name": "Maze Bank",
+    "description": "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Rerum repellat iure eligendi autem impedit corrupti fugiat repudiandae incidunt, aspernatur dignissimos totam deleniti eaque qui ab eveniet beatae obcaecati asperiores enim!",
+    "adjacentStreets": ["Groove Street", "Lincoln Avenue"],
+    "icon": "none",
+    "ticketPrice": "free",
+    "allowsPhotography": true,
+    "hasMetalDetector": true,
+    "categories": [ "business" ],
+    "businessHours": [{ "day": "sun", "opensAt": "08:00", "closesAt": "19:00" }],
+    "coordinates": { "lat": 33.738177, "lng": -118.813650 }
+  }, {
+    "name": "Maze Bank",
+    "description": "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Rerum repellat iure eligendi autem impedit corrupti fugiat repudiandae incidunt, aspernatur dignissimos totam deleniti eaque qui ab eveniet beatae obcaecati asperiores enim!",
+    "adjacentStreets": ["Groove Street", "Lincoln Avenue"],
+    "icon": "none",
+    "ticketPrice": "free",
+    "allowsPhotography": true,
+    "hasMetalDetector": true,
+    "categories": [ "business" ],
+    "businessHours": [{ "day": "sun", "opensAt": "08:00", "closesAt": "19:00" }],
+    "coordinates": { "lat": 33.738177, "lng": -118.813650 }
+  }]
+}
+
+GET http://localhost:5000/los-santos-tourist-guide/us-central1/tgapi HTTP/1.1
+
+GET http://localhost:5000/los-santos-tourist-guide/us-central1/tgapi/user/-Li64jzsrgSfRblkp8rY HTTP/1.1
+
+GET http://localhost:5000/los-santos-tourist-guide/us-central1/tgapi/spot HTTP/1.1
+
+GET http://localhost:5000/los-santos-tourist-guide/us-central1/tgapi/spot/-dfsdflkmdkfm HTTP/1.1
+
+POST http://localhost:5000/los-santos-tourist-guide/us-central1/tgapi/spot HTTP/1.1
+Content-Type: application/json
+
+{
+  "name": "Vespucci Beach",
+  "description": "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Rerum repellat iure eligendi autem impedit corrupti fugiat repudiandae incidunt, aspernatur dignissimos totam deleniti eaque qui ab eveniet beatae obcaecati asperiores enim!",
+  "adjacentStreets": ["Lowrider Street", "Lincoln Avenue"],
+  "icon": "none",
+  "ticketPrice": "US$ 14.00",
+  "allowsPhotography": true,
+  "hasMetalDetector": false,
+  "categories": [ "public" ],
+  "businessHours": [{ "day": "sun", "opensAt": "08:00", "closesAt": "19:00" }],
+  "coordinates": { "lat": 33.738357, "lng": -118.813710 }
+}
+
+DELETE http://localhost:5000/los-santos-tourist-guide/us-central1/tgapi/spot/-dfsdflkmdkfm HTTP/1.1
+
+PATCH http://localhost:5000/los-santos-tourist-guide/us-central1/tgapi/spot/-LiASICI520_pTpziRd4 HTTP/1.1
+Content-Type: application/json
+
+{
+  "ticketPrice": "free"
+}
+
+GET http://localhost:5000/los-santos-tourist-guide/us-central1/api/spot/category/public%20area HTTP/1.1
+
+GET https://us-central1-los-santos-tourist-guide.cloudfunctions.net/tgapi HTTP/1.1
+
+GET https://us-central1-los-santos-tourist-guide.cloudfunctions.net/tgapi/user/-Li64jtVCmYBntB0-Ldc HTTP/1.1
+
+GET https://los-santos-tourist-guide.firebaseio.com/touristspots/-Li64k969iz2zJORQPNW.json HTTP/1.1

@@ -1,0 +1,21 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-title>
+      Los Santos Tourist Guide
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<app-toolbar-menu (onSelectCategory)="onSelectCategory($event)" ></app-toolbar-menu>
+
+<ion-content>
+  <overlay-map 
+    img="../../assets/imgs/los-santos.svg"
+    [markers]="spots">
+  </overlay-map>
+  <ion-fab style="z-index: 999999">
+    <ion-fab-button color="primary">
+      <ion-icon name="search"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+</ion-content>
