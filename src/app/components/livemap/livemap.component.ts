@@ -44,6 +44,11 @@ export class LivemapComponent implements OnInit {
           map: map
         });
       });
+
+      new google.maps.Marker({
+        position: { lat: 33.738177, lng: -118.813650 },
+        map: map
+      })
     });
 
     

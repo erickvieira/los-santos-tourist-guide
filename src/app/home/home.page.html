@@ -6,6 +6,8 @@
   </ion-toolbar>
 </ion-header>
 
+<app-toolbar-menu (onSelectCategory)="onSelectCategory($event)" ></app-toolbar-menu>
+
 <ion-content>
   <overlay-map 
     img="../../assets/imgs/los-santos.svg"
