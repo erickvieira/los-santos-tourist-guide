@@ -12,8 +12,6 @@ Los Santos Tourist Guide is an open api made with Javascript/Typescript that all
 
 API Base | https://us-central1-los-santos-tourist-guide.cloudfunctions.net/tgapi/
 
-### Models
-
 | Models |  |
 | ------ | ------ |
 | User | Get self data and can manage TouristSpots |
@@ -40,3 +38,32 @@ API Base | https://us-central1-los-santos-tourist-guide.cloudfunctions.net/tgapi
 | PATCH | ```spot/<integer:id>``` | It changes and returns the TouristSpot with the desired Id |
 | DELETE | ```spot/<integer:id>``` | It destroys the TouristSpot with the desired Id |get /spot/category/:name
 | GET | ```spot/category/<string:name>``` | It gets only TouristSpots with desired category name |
+
+### Models Details
+
+* User
+    ```js
+    {
+        name: string;
+        description: string;
+        adjacentStreets: string[];
+        pictures(Optional): string[];
+        icon: string;
+        maxCapacity(Optional): integer;
+        ticketPrice: float | 'free';
+        allowsPet(Optional): boolean;
+        allowsPhotography(Optional): boolean;
+        hasMetalDetector(Optional): boolean;
+        categories: Categories[];
+        accessibilityItems(Optional): Accessibility[];
+        businessHours: BusinessHours[];
+        coordinates: Coordinates;
+        rating(Optional): Rating[];
+        ageGroup?: AgeGroup[];
+    }
+    ```
+
+License
+----
+
+MIT
