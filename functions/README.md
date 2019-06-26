@@ -63,6 +63,32 @@ API Base | https://us-central1-los-santos-tourist-guide.cloudfunctions.net/tgapi
     }
     ```
 
+* Categories (Enum) - Must be one of them:
+	SPORT, FOOD, HEALTH_CARE, FUN, BUSINESS, RACING,
+  	AVIATION, NAUTICAL, SOCIALIZING, SHOPPING, PUBLIC, PRIVATE
+
+* Acessibility (Enum) - Must be one of them:
+	ACCESS_RAMP, AUDIO_DESCRIPTION, MENU_BRAILLE, WHELLCHAIR_BATHROOM
+
+* BusinessHours
+	day:string (This options must be - sun, mon, tue, wed, thu, fry, sat )
+	openAt: string - This is the moment that the touristSpot opens
+	closeAt: string - This is the moment that the touristSpot closes
+
+* Coordinates
+	lat: double
+	lng: double
+
+* Rating
+	checkin: string - Moment that it was Evaluated
+	rate: double
+	comment(Optional): string
+
+* AgeGroup
+	minAge: integer
+	maxAge: integer
+	allowed: boolean - Is this age group is allowed or denied ?
+
 License
 ----
 
