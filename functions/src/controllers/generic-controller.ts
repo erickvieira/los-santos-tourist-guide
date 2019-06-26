@@ -50,7 +50,7 @@ export class GenericController<T> {
     });
   }
 
-  async insert(data: T, keyCompose: string[]) {
+  protected async insert(data: T, keyCompose: string[]) {
     let id = ``;
     if (!keyCompose || keyCompose.length === 0) {
       throw Error('enter a valid keyCompose argument');
@@ -90,7 +90,7 @@ export class GenericController<T> {
     });
   }
 
-  async update(id: string, data: T | any) {
+  protected async update(id: string, data: T | any) {
     return new Promise<void>((resolve, reject) => {
       request.patch(`${this.bdUrl}/${this.tableName}/${id}.json`, {
         json: data
