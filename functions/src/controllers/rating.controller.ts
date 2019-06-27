@@ -44,7 +44,7 @@ export class RatingController extends GenericController<Rating> {
       return rating.idUser = idUser;
     }).map((rating: Rating) => {
       return {
-        checkin: rating.checking,
+        checkin: rating.checkin,
         rate: rating.rate,
         comment: rating.comment,
       };
@@ -56,7 +56,7 @@ export class RatingController extends GenericController<Rating> {
       return rating.idTouristSpot = idTouristSpot;
     }).map((rating: Rating) => {
       return {
-        checkin: rating.checking,
+        checkin: rating.checkin,
         rate: rating.rate,
         comment: rating.comment,
       };

@@ -208,6 +208,22 @@ app.patch('/spot/:id', async (req, res) => {
   }
 });
 
+app.post('/rating', async (req, res) => {
+  try {
+    const list: TinyRating[] = await ratingCtrl.getUserRatings(req.body.idUser);
+    if (list && list.length > 0) {
+      res.status(400).send({ error: { message: 'you have already voted' } });
+    }
+    await ratingCtrl.insert(
+      req.body,
+      [ req.body.idUser, req.body.idTouristSpot, req.body.checking ]
+    );
+    res.send(200);
+  } catch (error) {
+    res.status(500).send({ error });
+  }
+});
+
 export const tgapi = functions.runWith({
   timeoutSeconds: 20,
   memory: '256MB'

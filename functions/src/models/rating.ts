@@ -11,7 +11,7 @@ export type Rating = IRating & FirebaeObjectReference;
 export interface IRating {
   idUser: string;
   idTouristSpot: string;
-  checking: number;
+  checkin: number;
   rate: Rate;
   comment?: string;
 }

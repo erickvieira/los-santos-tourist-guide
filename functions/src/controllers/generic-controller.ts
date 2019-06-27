@@ -26,7 +26,7 @@ export class GenericController<T> {
         if (err) {
           reject(err);
         } else {
-          resolve([].map.call(Object.values(JSON.parse(res.body)), (v: T) => {
+          resolve([].map.call(Object.values(JSON.parse(res.body || '{}')), (v: T) => {
             return v;
           }) as T[]);
         }
