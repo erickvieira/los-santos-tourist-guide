@@ -2,7 +2,7 @@ import { Categories } from './categories';
 import { Accessibility } from './accessibility';
 import { BusinessHours } from './business-hours';
 import { Coordinates } from './coordinates';
-import { Rating } from './rating';
+import { TinyRating } from './rating';
 import { AgeGroup } from './age-group';
 import { FirebaeObjectReference } from './firebase-object-reference';
 
@@ -23,7 +23,7 @@ export interface ITouristSpot {
   accessibilityItems?: Accessibility[];
   businessHours: BusinessHours[];
   coordinates: Coordinates;
-  rating?: Rating[];
+  rating?: TinyRating[];
   ageGroup?: AgeGroup[];
 }
 

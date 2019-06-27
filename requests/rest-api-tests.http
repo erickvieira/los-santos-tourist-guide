@@ -75,6 +75,15 @@ GET http://localhost:5000/los-santos-tourist-guide/us-central1/api/spot/category
 
 GET https://us-central1-los-santos-tourist-guide.cloudfunctions.net/tgapi HTTP/1.1
 
-GET https://us-central1-los-santos-tourist-guide.cloudfunctions.net/tgapi/user/-Li64jtVCmYBntB0-Ldc HTTP/1.1
+GET https://us-central1-los-santos-tourist-guide.cloudfunctions.net/tgapi/user/-Li64jzsrgSfRblkp8rY HTTP/1.1
+
+GET https://us-central1-los-santos-tourist-guide.cloudfunctions.net/tgapi/user/-Li64jzsrgSfRblkp8rY/ratings HTTP/1.1
+
+POST https://us-central1-los-santos-tourist-guide.cloudfunctions.net/tgapi/login HTTP/1.1
+
+{
+  "email": "rafareisbr@gmail.com",
+  "password": "limao007"
+}
 
 GET https://los-santos-tourist-guide.firebaseio.com/touristspots/-Li64k969iz2zJORQPNW.json HTTP/1.1

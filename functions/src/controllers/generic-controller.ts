@@ -4,24 +4,20 @@ import * as request from 'request';
 
 export class GenericController<T> {
 
-  protected loggerRef: admin.database.Reference;
   protected dbRef: admin.database.Reference;
   private bdUrl = 'https://los-santos-tourist-guide.firebaseio.com';
 
   constructor(
-    private tableName: string,
-    logger?: string,
+    private tableName: string
   ) {
     if (admin.apps.length === 0) {
       admin.initializeApp({
-        // credential: admin.credential.cert(serviceAccount()),
         credential: admin.credential.applicationDefault(),
         projectId: 'los-santos-tourist-guide',
         databaseURL: 'https://los-santos-tourist-guide.firebaseio.com'
       });
     }
     this.dbRef = admin.database().ref(tableName);
-    this.loggerRef = admin.database().ref(logger);
   }
 
   async getList(): Promise<T[]> {
@@ -90,7 +86,7 @@ export class GenericController<T> {
     });
   }
 
-  protected async update(id: string, data: T | any) {
+  protected async update(id: string, data: T | Partial<T>) {
     return new Promise<void>((resolve, reject) => {
       request.patch(`${this.bdUrl}/${this.tableName}/${id}.json`, {
         json: data
