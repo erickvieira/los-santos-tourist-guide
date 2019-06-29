@@ -23,9 +23,6 @@ API Base | https://us-central1-los-santos-tourist-guide.cloudfunctions.net/tgapi
 | POST | ```login/``` | ```email: string, password: string``` | returns the authenticated User |
 | POST | ```register/``` | ```name: string, email: string, password``` | returns 'new account created' |
 | ------ | ------ | ----- | ---- |
-| GET | ```/user/<integer:id>/ratings``` | - | return a list of ratings of the User |
-| POST | ```/user/<integer:id>/promote``` | - | It changes the role of the user from 'app' to 'admin' an new User |
-| ------ | ------ | ----- | ---- |
 | GET | ```user/``` | - | It returns an array of Users |
 | POST | ```user/``` | - | It registers an new User |
 | GET | ```user/<integer:id>``` | - | It returns the User with the desired Id |
@@ -33,6 +30,8 @@ API Base | https://us-central1-los-santos-tourist-guide.cloudfunctions.net/tgapi
 | --- | --- | --- | --- |
 | POST | ```/user/<integer:id>/promote``` | - | It changes the role of the user from 'app' to 'admin' an new User |
 | POST | ```/user/<integer:id>/demote``` | - | It changes the role of the user from 'admin' to 'app' an new User |
+| ------ | ------ | ----- | ---- |
+| GET | ```/user/<integer:id>/ratings``` | - | return a list of ratings of the User |
 
 ### Tourist Spot Endpoints
 | Method | URL | Return |
@@ -43,6 +42,12 @@ API Base | https://us-central1-los-santos-tourist-guide.cloudfunctions.net/tgapi
 | PATCH | ```spot/<integer:id>``` | It changes and returns the TouristSpot with the desired Id |
 | DELETE | ```spot/<integer:id>``` | It destroys the TouristSpot with the desired Id |get /spot/category/:name
 | GET | ```spot/category/<string:name>``` | It gets only TouristSpots with desired category name |
+| GET | ```spot/<integer:id>/ratings``` | It gets all ratings of a spot |
+
+### Ratings
+| Method | URL | Expects | Returns 
+| ------ | ------ | -------- | ------ |
+| POST | ```rating/``` | idUser:string, idTouristSpot:string, checking:string | Return status(200) OK
 
 ### Models Details
 
