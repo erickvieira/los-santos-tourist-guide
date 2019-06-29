@@ -34,15 +34,15 @@ API Base | https://us-central1-los-santos-tourist-guide.cloudfunctions.net/tgapi
 | GET | ```/user/<integer:id>/ratings``` | - | return a list of ratings of the User |
 
 ### Tourist Spot Endpoints
-| Method | URL | Return |
-| ------ | ------ | -------- |
-| GET | ```spot/``` | It returns an array of TouristSpot.|
-| POST | ```spot/``` | It registers an new TouristSpot |
-| GET | ```spot/<integer:id>``` | It returns the TouristSpot with the desired Id |
-| PATCH | ```spot/<integer:id>``` | It changes and returns the TouristSpot with the desired Id |
-| DELETE | ```spot/<integer:id>``` | It destroys the TouristSpot with the desired Id |get /spot/category/:name
-| GET | ```spot/category/<string:name>``` | It gets only TouristSpots with desired category name |
-| GET | ```spot/<integer:id>/ratings``` | It gets all ratings of a spot |
+| Method | URL | Expects | Return |
+| ------ | ------ | ----- | ----- |
+| GET | ```spot/``` | - | It returns an array of TouristSpot.|
+| POST | ```spot/``` | id: string; name: string; categories: string[]; coordinates: Coordinates; | It registers an new TouristSpot |
+| GET | ```spot/<integer:id>``` | - | It returns the TouristSpot with the desired Id |
+| PATCH | ```spot/<integer:id>``` | - | It changes and returns the TouristSpot with the desired Id |
+| DELETE | ```spot/<integer:id>``` | - | It destroys the TouristSpot with the desired Id |get /spot/category/:name
+| GET | ```spot/category/<string:name>``` | - | It gets only TouristSpots with desired category name |
+| GET | ```spot/<integer:id>/ratings``` | - | It gets all ratings of a spot |
 
 ### Ratings
 | Method | URL | Expects | Returns 
