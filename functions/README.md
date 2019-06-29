@@ -44,7 +44,7 @@ API Base | https://us-central1-los-santos-tourist-guide.cloudfunctions.net/tgapi
 | GET | ```spot/category/<string:name>``` | - | It gets only TouristSpots with desired category name |
 | GET | ```spot/<integer:id>/ratings``` | - | It gets all ratings of a spot |
 
-### Ratings
+### Ratings EndPoints
 | Method | URL | Expects | Returns 
 | ------ | ------ | -------- | ------ |
 | POST | ```rating/``` | idUser:string, idTouristSpot:string, checking:string | Return status(200) OK
