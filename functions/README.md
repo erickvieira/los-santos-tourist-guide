@@ -18,16 +18,21 @@ API Base | https://us-central1-los-santos-tourist-guide.cloudfunctions.net/tgapi
 | TouristSpot | Is is managed by a logged in User |
 
 ### User Endpoints
-| Method | URL | Return |
-| ------ | ------ | -------- |
-| GET | ```user/``` | It returns an array of Users.|
-| POST | ```user/``` | It registers an new User |
-| GET | ```user/<integer:id>``` | It returns the User with the desired Id |
-| PATCH | ```user/<integer:id>``` | It changes and returns the User with the desired Id |
-| DELETE | ```user/<integer:id>``` | It destroys the User with the desired Id |
-| ------ | ------ | -------- |
-| POST | ```/user/<integer:id>/promote``` | It changes the role of the user from 'app' to 'admin' an new User |
-| POST | ```/user/<integer:id>/demote``` | It changes the role of the user from 'admin' to 'app' an new User |
+| Method | URL | Expects | Returns 
+| ------ | ------ | -------- | ------ |
+| POST | ```login/``` | ```email: string, password: string``` | returns the authenticated User |
+| POST | ```register/``` | ```name: string, email: string, password``` | returns 'new account created' |
+| ------ | ------ | ----- | ---- |
+| GET | ```/user/<integer:id>/ratings``` | - | return a list of ratings of the User |
+| POST | ```/user/<integer:id>/promote``` | - | It changes the role of the user from 'app' to 'admin' an new User |
+| ------ | ------ | ----- | ---- |
+| GET | ```user/``` | - | It returns an array of Users |
+| POST | ```user/``` | - | It registers an new User |
+| GET | ```user/<integer:id>``` | - | It returns the User with the desired Id |
+| DELETE | ```user/<integer:id>``` | - | It destroys the User with the desired Id |
+| --- | --- | --- | --- |
+| POST | ```/user/<integer:id>/promote``` | - | It changes the role of the user from 'app' to 'admin' an new User |
+| POST | ```/user/<integer:id>/demote``` | - | It changes the role of the user from 'admin' to 'app' an new User |
 
 ### Tourist Spot Endpoints
 | Method | URL | Return |
