@@ -42,61 +42,61 @@ API Base | https://us-central1-los-santos-tourist-guide.cloudfunctions.net/tgapi
 ### Models Details
 
 * User
-    ```js
-    {
-        name: string;
-        description: string;
-        adjacentStreets: string[];
-        pictures(Optional): string[];
-        icon: string;
-        maxCapacity(Optional): integer;
-        ticketPrice: float | 'free';
-        allowsPet(Optional): boolean;
-        allowsPhotography(Optional): boolean;
-        hasMetalDetector(Optional): boolean;
-        categories: Categories[];
-        accessibilityItems(Optional): Accessibility[];
-        businessHours: BusinessHours[];
-        coordinates: Coordinates;
-        rating(Optional): Rating[];
-        ageGroup?: AgeGroup[];
-    }
-    ```
+	```js
+	{
+		name: string;
+		description: string;
+		adjacentStreets: string[];
+		pictures(Optional): string[];
+		icon: string;
+		maxCapacity(Optional): integer;
+		ticketPrice: float | 'free';
+		allowsPet(Optional): boolean;
+		allowsPhotography(Optional): boolean;
+		hasMetalDetector(Optional): boolean;
+		categories: Categories[];
+		accessibilityItems(Optional): Accessibility[];
+		businessHours: BusinessHours[];
+		coordinates: Coordinates;
+		rating(Optional): Rating[];
+		ageGroup?: AgeGroup[];
+	}
+	```
 
 * BusinessHours
-```js
-{
-	day:string (This options must be - sun, mon, tue, wed, thu, fry, sat )
-	openAt: string - This is the moment that the touristSpot opens
-	closeAt: string - This is the moment that the touristSpot closes
-}
-```
+	```js
+	{
+		day:string (This options must be - sun, mon, tue, wed, thu, fry, sat )
+		openAt: string - This is the moment that the touristSpot opens
+		closeAt: string - This is the moment that the touristSpot closes
+	}
+	```
 
 * Coordinates
-    ```js
-    {
-        lat: double
-	lng: double
-    }
-    ```
+	```js
+	{
+		lat: double
+		lng: double
+	}
+	```
 
 * Rating
-     ```js
-    {
-	checkin: string - Moment that it was Evaluated
-	rate: double
-	comment(Optional): string
-    }
-    ```
+	```js
+	{
+		checkin: string - Moment that it was Evaluated
+		rate: double
+		comment(Optional): string
+	}
+	```
 
 * AgeGroup
-     ```js
-    {
-        minAge: integer
-	maxAge: integer
-	allowed: boolean - Is this age group is allowed or denied ?
-    }
-    ```
+	```js
+	{
+		minAge: integer
+		maxAge: integer
+		allowed: boolean - Is this age group is allowed or denied ?
+	}
+	```
     
 #### Enums
 * Categories (Enum) - Must be one of them:
