@@ -1,5 +1,9 @@
 # los-santos-tourist-guide
-- Guia Turístico **fictício** da cidade de Los Santos.
+- This is a **fictitious** Tourist Guide of Los Santos City.
 
-### Acesso
-- Nossa aplicação está disponível [na web (como PWA)](https://los-santos-tourist-guide.web.app), e conta com uma [api rest](https://us-central1-los-santos-tourist-guide.cloudfunctions.net/tgapi).
+### Access
+- The application is available [here (as an PWA)](https://los-santos-tourist-guide.web.app).
+- And here is the [rest api](https://us-central1-los-santos-tourist-guide.cloudfunctions.net/tgapi).
+
+### Documentation
+- You can read the rest api specifications [here](https://github.com/erickvieira/los-santos-tourist-guide/blob/master/functions/README.md).

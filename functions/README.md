@@ -23,8 +23,7 @@ API Base | https://us-central1-los-santos-tourist-guide.cloudfunctions.net/tgapi
 | POST | ```login/``` | ```email: string, password: string``` | returns the authenticated User |
 | POST | ```register/``` | ```name: string, email: string, password``` | returns 'new account created' |
 | ------ | ------ | ----- | ---- |
-| GET | ```user/``` | - | It returns an array of Users |
-| POST | ```user/``` | - | It registers an new User |
+| PATCH | ```user/<integer:id>``` | - | It updates the User by the informed Id |
 | GET | ```user/<integer:id>``` | - | It returns the User with the desired Id |
 | DELETE | ```user/<integer:id>``` | - | It destroys the User with the desired Id |
 | --- | --- | --- | --- |
