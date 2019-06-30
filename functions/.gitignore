@@ -6,3 +6,6 @@
 typings/
 
 node_modules/
+
+# Custom ignores
+src/controllers/api/firebase-admin/admin-sdk-auth.ts

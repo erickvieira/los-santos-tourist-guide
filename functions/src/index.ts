@@ -9,12 +9,18 @@ import { UserController } from './controllers/user.controller';
 import { User, IUser } from './models/user';
 import { RatingController } from './controllers/rating.controller';
 import { TinyRating } from './models/rating';
+import { adminSdkAuth } from './controllers/api/firebase-admin/admin-sdk-auth';
 
-const tsCtrl = new TouristSpotController('touristspots');
-const usrCtrl = new UserController('users');
-const ratingCtrl = new RatingController('ratings');
+admin.initializeApp({
+  credential: admin.credential.cert(adminSdkAuth),
+  projectId: 'los-santos-tourist-guide',
+  databaseURL: 'https://los-santos-tourist-guide.firebaseio.com'
+});
 
-const auth = admin.auth();
+const tsCtrl = new TouristSpotController();
+const usrCtrl = new UserController();
+const ratingCtrl = new RatingController();
+
 
 const app = express();
 app.use(cors());
@@ -26,7 +32,7 @@ app.options('*', cors());
 
 const ok = Object.freeze({
   message: 'It\'s alright here, tall key?',
-  version: '1.5.0'
+  version: '1.6.1'
 });
 
 app.get('/', (_, res) => {
@@ -43,8 +49,9 @@ app.post('/login', async (req, res) => {
     if (!user) {
       throw Error('invalid user data');
     }
-    const dbUser = (await usrCtrl.getUserByEmail(user.email));
-    if (await auth.verifyIdToken(dbUser.token)) {
+    const dbUser = await usrCtrl.getUserByEmailAndPassowrd(user.email, user.password);
+    if (dbUser) {
+      delete dbUser.password;
       res.send(dbUser);
     } else {
       res.status(403).send({ error: { message: 'not authenticated' } });
@@ -56,22 +63,21 @@ app.post('/login', async (req, res) => {
 
 app.post('/register', async (req, res) => {
   try {
-    const user: IUser & { password: string } = req.body;
+    const user: IUser = req.body;
     if (!user) {
-      throw Error('invalid user data');
+      throw { message: 'invalid user data' };
     }
-    const userData = await auth.createUser({
-      disabled: false,
-      displayName: user.name,
-      email: user.email,
-      password: user.password,
-    });
     await usrCtrl.insert({
       ...user,
-      id: userData.uid
+      role: 'app',
+      active: true,
     }, [ user.email ]);
-    res.status(201).send({ message: 'new account created' });
+    res.status(201).send({
+      userData: user,
+      message: 'new account created'
+    });
   } catch (error) {
+    console.error(error);
     res.status(500).send({ error });
   }
 });
@@ -98,11 +104,11 @@ app.get('/user/:id/ratings', async (req, res) => {
   }
 });
 
-app.post('/user', async (req, res) => {
+app.patch('/user/:id', async (req, res) => {
   try {
-    await usrCtrl.insert(
-      { ...req.body, role: 'app' } as User,
-      [ req.body.email ]
+    await usrCtrl.update(
+      req.params.id,
+      { ...req.body, role: 'app' } as User
     );
     res.send(200);
   } catch (error) {

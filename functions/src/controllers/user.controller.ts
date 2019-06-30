@@ -1,50 +1,25 @@
 import { GenericController } from './generic-controller';
 import { User, IUser } from '../models/user';
-import { FirebaeObjectReference } from '../models/firebase-object-reference';
 
 export class UserController extends GenericController<User> {
 
-  private TouristSpotTypeGuard = class implements IUser, FirebaeObjectReference {
-    id = '';
-    name = '';
-    email = '';
-    token = '';
-    role: 'app' | 'admin' = 'app';
-    active = false;
-  };
+  constructor() { super('users'); }
 
-  private typeGuard = new this.TouristSpotTypeGuard();
-
-  constructor(tableName: string) { super(tableName); }
-
-  async insert(data: User, keyCompose: string[]) {
-    for (const k in this.typeGuard) {
-      if (!(data as any)[k]) {
-        throw Error(`the required key '${k}' is null`);
-      }
-    }
-    for (const k in data) {
-      if (!(this.typeGuard as any)[k]) {
-        throw Error(`the key '${k}' is not an attribute of User`);
-      }
-    }
-    super.insert(data, keyCompose);
+  async insert(data: IUser, keyCompose: string[]) {
+    await super.insert(data, keyCompose);
   }
 
   async update(id: string, data: User | Partial<User>) {
-    for (const k in data) {
-      if (!(this.typeGuard as any)[k]) {
-        throw Error(`the key '${k}' is not an attribute of User`);
-      }
-    }
-    super.update(id, data);
+    await super.update(id, data);
   }
 
-  async getUserByEmail(email: string): Promise<User> {
+  async getUserByEmailAndPassowrd(email: string, password: string): Promise<User> {
     const users = await this.getList();
-    const user = users.find(u => u.email === email);
+    const user = users.find(u => {
+      return u.email === email && u.password === password;
+    });
     if (!user) {
-      throw Error('user not found');
+      throw { message: 'user not found' };
     } else {
       return user;
     }

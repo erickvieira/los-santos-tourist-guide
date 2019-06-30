@@ -71,19 +71,28 @@ Content-Type: application/json
   "ticketPrice": "free"
 }
 
-GET http://localhost:5000/los-santos-tourist-guide/us-central1/api/spot/category/public%20area HTTP/1.1
+GET http://localhost:5000/los-santos-tourist-guide/us-central1/tgapi/spot/category/public%20area HTTP/1.1
 
 GET https://us-central1-los-santos-tourist-guide.cloudfunctions.net/tgapi HTTP/1.1
 
 GET https://us-central1-los-santos-tourist-guide.cloudfunctions.net/tgapi/user/-Li64jzsrgSfRblkp8rY HTTP/1.1
 
-GET https://us-central1-los-santos-tourist-guide.cloudfunctions.net/tgapi/user/-Li64jzsrgSfRblkp8rY/ratings HTTP/1.1
+GET http://localhost:5000/los-santos-tourist-guide/us-central1/tgapi/user/-Li64jzsrgSfRblkp8rY/ratings HTTP/1.1
 
 POST https://us-central1-los-santos-tourist-guide.cloudfunctions.net/tgapi/login HTTP/1.1
+Content-Type: application/json
 
 {
   "email": "rafareisbr@gmail.com",
-  "password": "limao007"
+  "password": "bGltYW8wMDc="
 }
 
-GET https://los-santos-tourist-guide.firebaseio.com/touristspots/-Li64k969iz2zJORQPNW.json HTTP/1.1
+POST https://us-central1-los-santos-tourist-guide.cloudfunctions.net/tgapi/register HTTP/1.1
+Content-Type: application/json
+
+{
+  "name": "Eruck Vieira",
+  "active": true,
+  "email": "vserick98@gmail.com",
+  "password": "bGltYW8wMDc="
+}
