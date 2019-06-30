@@ -4,6 +4,7 @@ import * as admin from 'firebase-admin';
 import * as express from 'express';
 import * as bodyParser from 'body-parser';
 import * as cors from 'cors';
+import * as moment from 'moment';
 import { TouristSpot, TinyTouristSpot } from './models/tourist-spot';
 import { UserController } from './controllers/user.controller';
 import { User, IUser } from './models/user';
@@ -220,9 +221,10 @@ app.post('/rating', async (req, res) => {
     if (list && list.length > 0) {
       res.status(400).send({ error: { message: 'you have already voted' } });
     }
+    req.body.checkin = req.body.checkin || moment.now();
     await ratingCtrl.insert(
       req.body,
-      [ req.body.idUser, req.body.idTouristSpot, req.body.checking ]
+      [ req.body.idUser, req.body.idTouristSpot, req.body.checkin ]
     );
     res.send(200);
   } catch (error) {

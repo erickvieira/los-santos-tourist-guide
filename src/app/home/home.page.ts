@@ -14,7 +14,7 @@ export class HomePage implements OnInit {
   constructor(private touristSpot: TouristSpotService) {}
 
   ngOnInit() {
-    this.touristSpot.getTouristSpots()
+    this.touristSpot.getList()
       .subscribe((data) => {
         this.spots = data;
       });
@@ -22,7 +22,7 @@ export class HomePage implements OnInit {
 
   onSelectCategory(categoryName: string) {
     console.log(categoryName);
-    this.touristSpot.getTouristSpotsByCategory(categoryName).subscribe((data) => {
+    this.touristSpot.getListByCategory(categoryName).subscribe((data) => {
       this.spots = data;
     });
   }

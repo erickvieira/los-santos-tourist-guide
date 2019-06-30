@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { TouristSpot } from '../../../functions/src/models/tourist-spot';
+import { baseUrl } from '../models/constants';
 
 @Injectable({
   providedIn: 'root',
@@ -10,11 +11,24 @@ export class TouristSpotService {
 
   constructor(private http: HttpClient) {}
 
-  getTouristSpots(): Observable<TouristSpot[]> {
-    return this.http.get<TouristSpot[]>('https://us-central1-los-santos-tourist-guide.cloudfunctions.net/api/spot/')
+  getList(): Observable<TouristSpot[]> {
+    return this.http.get<TouristSpot[]>(`${baseUrl}/spot/`);
   }
 
-  getTouristSpotsByCategory(spotCategory: string): Observable<TouristSpot[]> {
-    return this.http.get<TouristSpot[]>('https://us-central1-los-santos-tourist-guide.cloudfunctions.net/api/spot/' + spotCategory);
+  details(id: string) {
+    return this.http.get(
+      `${baseUrl}/spot/${id}`
+    );
   }
+
+  getListByCategory(spotCategory: string): Observable<TouristSpot[]> {
+    return this.http.get<TouristSpot[]>(`${baseUrl}/spot/${spotCategory}`);
+  }
+
+  getRatings(spotId: string) {
+    return this.http.get(
+      `${baseUrl}/spot/${spotId}/ratings`
+    );
+  }
+
 }
