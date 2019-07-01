@@ -6,7 +6,6 @@ import { RouterModule } from '@angular/router';
 
 import { HomePage } from './home.page';
 import { LivemapModule } from '../components/livemap/livemap.module';
-import { TouristSpotService } from '../services/tourist-spot.service';
 import { ToolbarMenuComponent } from '../components/toolbar-menu/toolbar-menu.component';
 
 @NgModule({

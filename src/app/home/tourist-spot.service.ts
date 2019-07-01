@@ -8,13 +8,15 @@ import { TouristSpot } from '../../../functions/src/models/tourist-spot';
 })
 export class TouristSpotService {
 
+  BASE_URL = 'https://us-central1-los-santos-tourist-guide.cloudfunctions.net/tgapi/';
+
   constructor(private http: HttpClient) {}
 
   getTouristSpots(): Observable<TouristSpot[]> {
-    return this.http.get<TouristSpot[]>('https://us-central1-los-santos-tourist-guide.cloudfunctions.net/api/spot/')
+    return this.http.get<TouristSpot[]>(this.BASE_URL + 'spot/');
   }
 
   getTouristSpotsByCategory(spotCategory: string): Observable<TouristSpot[]> {
-    return this.http.get<TouristSpot[]>('https://us-central1-los-santos-tourist-guide.cloudfunctions.net/api/spot/' + spotCategory);
+    return this.http.get<TouristSpot[]>(this.BASE_URL + 'spot/' + spotCategory);
   }
 }
