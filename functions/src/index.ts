@@ -33,7 +33,7 @@ app.options('*', cors());
 
 const ok = Object.freeze({
   message: 'It\'s alright here, tall key?',
-  version: '1.6.1'
+  version: '1.7.3'
 });
 
 app.get('/', (_, res) => {

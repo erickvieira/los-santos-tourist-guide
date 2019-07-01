@@ -10,16 +10,31 @@ import { ITouristSpot, TouristSpot } from 'functions/src/models/tourist-spot';
 })
 export class UserService {
 
-  instance: User;
+// tslint:disable: variable-name
+  private _instance: User;
+
+  get instance() {
+    if (this._instance) {
+      return this._instance;
+    } else {
+      const currentUserJson = localStorage.getItem('currentUser');
+      if (currentUserJson) {
+        this._instance = JSON.parse(currentUserJson);
+      } else {
+        this._instance = {} as User;
+      }
+      return this._instance;
+    }
+  }
 
   constructor(private http: HttpClient) { }
 
   isAuthenticated() {
-    return this.instance.id !== null;
+    return this.instance && this.instance.id;
   }
 
   login(email: string, password: string) {
-    return this.http.post(
+    return this.http.post<User>(
       `${baseUrl}/login`,
       { email, password },
       { headers: jsonRequest }

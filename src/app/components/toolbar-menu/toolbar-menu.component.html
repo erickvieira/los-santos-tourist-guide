@@ -1,10 +1,11 @@
-<ion-toolbar color="light">
-  <ion-buttons slot="start">
-    <ion-button (click)="onGetPoints('normal')">
-      <ion-icon slot="icon-only" name="airplane"></ion-icon>
-    </ion-button>
-    <ion-button (click)="onGetPoints('different')" >
-      <ion-icon slot="icon-only" name="airplane"></ion-icon>
-    </ion-button>
-  </ion-buttons>
+<ion-toolbar color="primary">
+  <div style="overflow-x: scroll; overflow-y: hidden;">
+    <ion-buttons slot="start">
+      <ion-button (click)="emitCategory(category)" (press)="details(category)" 
+        *ngFor="let category of categories">
+        <ion-icon slot="icon-only" [name]="icons[category]" 
+          [title]="labels[category]"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </div>
 </ion-toolbar>

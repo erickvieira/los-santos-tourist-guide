@@ -2,20 +2,33 @@
   <ion-toolbar color="primary">
     <ion-title>
       Los Santos Tourist Guide
+      <ion-chip>
+        <ion-text color="light">
+          {{ currentCategory || 'all categories' }}
+        </ion-text>
+      </ion-chip>
     </ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="showFilters = !showFilters; showFilters ? undefined : getAll()">
+        <ion-icon [name]="showFilters ? 'close' : 'funnel'" 
+          slot="icon-only"></ion-icon>
+      </ion-button>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
-<app-toolbar-menu (onSelectCategory)="onSelectCategory($event)" ></app-toolbar-menu>
+<app-toolbar-menu (on-select-category)="onSelectCategory($event)"
+  [@easyInOutVer] *ngIf="showFilters">
+</app-toolbar-menu>
 
 <ion-content>
   <overlay-map 
     img="../../assets/imgs/los-santos.svg"
-    [markers]="spots">
+    [spots]="spots">
   </overlay-map>
-  <ion-fab style="z-index: 999999">
-    <ion-fab-button color="primary">
-      <ion-icon name="search"></ion-icon>
+  <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+    <ion-fab-button color="dark" (click)="help()">
+      <ion-icon name="help-circle" color="light"></ion-icon>
     </ion-fab-button>
   </ion-fab>
 </ion-content>

@@ -1,0 +1,25 @@
+.map-bg {
+  background: url('../../assets/imgs/los-santos.svg') fixed cover center center no-repeat;
+  --ion-background: url('../../assets/imgs/los-santos.svg') fixed cover center center no-repeat;
+  --background: url('../../assets/imgs/los-santos.svg') fixed cover center center no-repeat;
+  background-image: url('../../assets/imgs/los-santos.svg');
+  background-attachment: fixed;
+  background-position: center center;
+  background-color: var(--ion-color-primary);
+  background-repeat: no-repeat;
+  background-origin: content-box;
+  background-size: cover;
+}
+
+.login-box {
+  width: 100%; max-width: 350px; 
+  background-color: white;
+  z-index: 9999;
+}
+
+.backdrop {
+  background: rgba(255, 255, 255, 0.5);
+  height: 100%;
+  width: 100%;
+  z-index: 999;
+}

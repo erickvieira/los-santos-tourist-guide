@@ -1,5 +1,9 @@
 /// <reference types="@types/googlemaps" />
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, ElementRef, ViewChild, SimpleChanges } from '@angular/core';
+import { Coordinates } from 'functions/src/models/coordinates';
+import { TinyTouristSpot } from 'functions/src/models/tourist-spot';
+import { InteractionService } from 'src/app/services/interaction.service';
+import { TouristSpotService } from 'src/app/services/tourist-spot.service';
 
 @Component({
   selector: 'overlay-map',
@@ -8,21 +12,27 @@ import { Component, OnInit, Input } from '@angular/core';
 })
 export class LivemapComponent implements OnInit {
 
-// tslint:disable-next-line: no-input-rename
+  // tslint:disable-next-line: no-input-rename
   @Input('img') srcImage: string;
-  @Input('markers') markers: Array<google.maps.LatLng> = [];
+  @Input('spots') spots: Array<TinyTouristSpot> = [];
   overlay: any = undefined;
+
+  // tslint:disable-next-line:member-ordering
+  @ViewChild('map') mapElement: ElementRef;
+  map: any;
+
+  markers: google.maps.Marker[] = [];
 
   points = [
     { lat: 33.738177, lng: -118.813650 },
     { lat: 33.738877, lng: -118.827654 }
   ]
 
-  constructor() { }
+  constructor(private spotServ: TouristSpotService) { }
 
   ngOnInit() {
     google.maps.event.addDomListener(window, 'load', () => {
-      const map = new google.maps.Map(document.getElementById('map'), {
+      this.map = new google.maps.Map(this.mapElement.nativeElement, {
         zoom: 14,
         center: { lat: 33.738177, lng: -118.813650 },
         mapTypeId: google.maps.MapTypeId.ROADMAP,
@@ -32,26 +42,83 @@ export class LivemapComponent implements OnInit {
         disableDoubleClickZoom: true,
         streetViewControl: false
       });
+      this.map.addListener('click', (e) => {
+        console.log({
+          lat: e.latLng.lat(),
+          lng: e.latLng.lng(),
+        });
+      });
+    });
+  }
+
+  // tslint:disable-next-line:use-life-cycle-interface
+  ngOnChanges(changes: SimpleChanges) {
+    if (this.spots && changes.spots.currentValue !== changes.spots.previousValue) {
+      if (changes.spots.previousValue) {
+        this.markers.forEach(m => {
+          m.setMap(null);
+        });
+        this.markers = [];
+      }
+      this.spots.forEach(async s => {
+        const marker = new google.maps.Marker({
+          position: new google.maps.LatLng(s.coordinates.lat, s.coordinates.lng),
+          title: s.name,
+          animation: google.maps.Animation.DROP,
+          icon: '../../../assets/imgs/pin.svg',
+        });
+        const infowindow = new google.maps.InfoWindow({
+          maxWidth: 250,
+          content: await this.buildMapLabel(s.id),
+        });
+        marker.setMap(this.map);
+        this.markers.push(marker);
+        // tslint:disable-next-line:no-shadowed-variable
+        google.maps.event.addListener(marker, 'click', (marker => {
+          return function() {
+            // infowindow.setContent(this.label);
+            infowindow.open(this.map, marker);
+          };
+        })(marker));
+      });
       const bounds = new google.maps.LatLngBounds(
         new google.maps.LatLng(33.709254, -118.855531),
         new google.maps.LatLng(33.812495, -118.767535)
       );
-      this.overlay = new USGSOverlay(bounds, this.srcImage, map);
+      // tslint:disable-next-line: no-use-before-declare
+      this.overlay = new USGSOverlay(bounds, this.srcImage, this.map);
+    }
+  }
 
-      this.markers.forEach(marker => {
-        new google.maps.Marker({
-          position: marker,
-          map: map
-        });
-      });
-
-      new google.maps.Marker({
-        position: { lat: 33.738177, lng: -118.813650 },
-        map: map
-      })
-    });
-
-    
+  async buildMapLabel(spotId: string) {
+    const full = await this.spotServ.details(spotId).toPromise();
+    return `
+      <h6 style="color: #7044ff; margin: 0 !important;">
+        ${full.name}
+      </h6>
+      <div style="color: #999; font-weight: 500;">
+        <div style="width: 100%; font-size: 14px; margin-bottom: 6px">
+          <b>${full.description || 'no description'}</b>
+        </div>
+        <div style="display: flex;">
+          <div style="flex: 2">Capacity:</div>
+          <div style="flex: 2; text-align: right; color: #666">
+            <b>${full.maxCapacity || 'unknown'}</b>
+          </div>
+        </div>
+        <div style="display: flex;">
+          <div style="flex: 2">Ticket:</div>
+          <div style="flex: 2; text-align: right; color: #666">
+            <b>${typeof full.ticketPrice === 'string' ? full.ticketPrice : 'US$' + Math.floor(full.ticketPrice).toFixed(2) || 'unknown'}</b>
+          </div>
+        </div>
+        <div style="width: 100%; text-align: center; margin-top: 5px">
+          <i>
+            <small>${full.categories.join(' / ')}</small>
+          </i>
+        </div>
+      </div>
+    `;
   }
 
 }

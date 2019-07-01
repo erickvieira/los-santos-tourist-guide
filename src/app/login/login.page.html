@@ -1,9 +1,38 @@
-<ion-header>
-  <ion-toolbar>
-    <ion-title>login</ion-title>
-  </ion-toolbar>
-</ion-header>
-
-<ion-content>
-
+<ion-content class="map-bg">
+  <div class="backdrop center"></div>
+  <ion-card class="center login-box">
+    <ion-card-header style="text-align: right">
+      <ion-card-subtitle>Los Santos Tourist Guide</ion-card-subtitle>
+      <ion-card-title>Sing in</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <ion-list lines="none">
+        <form [formGroup]="loginForm" (ngSubmit)="login()">
+          <ion-item>
+          <ion-label position="floating" color="primary">
+            <ion-icon name="person" slot="start"></ion-icon>
+            E-mail
+          </ion-label>
+          <ion-input autocomplete="new-password" formControlName="email" type="email"></ion-input>
+          </ion-item>
+          <ion-item>
+            <ion-label position="floating" color="primary">
+              <ion-icon name="lock" slot="start"></ion-icon>
+              Password
+            </ion-label>
+            <ion-input autocomplete="new-password" formControlName="password"
+              [type]="showPassword ? 'text' : 'password'"></ion-input>
+          </ion-item>
+          <ion-item style="padding-top: 15px">
+            <ion-button type="submit" expand="full" size="large" [disabled]="!loginForm.valid">
+              <ion-label>
+                Entrar
+                <ion-icon name="log-in" slot="start"></ion-icon>
+              </ion-label>
+            </ion-button>
+          </ion-item>
+        </form>
+      </ion-list>
+    </ion-card-content>
+  </ion-card>
 </ion-content>

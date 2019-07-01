@@ -16,13 +16,13 @@ export class TouristSpotService {
   }
 
   details(id: string) {
-    return this.http.get(
+    return this.http.get<TouristSpot>(
       `${baseUrl}/spot/${id}`
     );
   }
 
   getListByCategory(spotCategory: string): Observable<TouristSpot[]> {
-    return this.http.get<TouristSpot[]>(`${baseUrl}/spot/${spotCategory}`);
+    return this.http.get<TouristSpot[]>(`${baseUrl}/spot?category=${spotCategory}`);
   }
 
   getRatings(spotId: string) {

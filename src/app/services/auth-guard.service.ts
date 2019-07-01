@@ -15,13 +15,13 @@ export class AuthGuardService implements CanActivateChild {
 
   // tslint:disable-next-line:max-line-length
   canActivateChild(
-    childRoute: ActivatedRouteSnapshot, 
+    childRoute: ActivatedRouteSnapshot,
     state: RouterStateSnapshot
   ): boolean | UrlTree | Observable<boolean | UrlTree> | Promise<boolean | UrlTree> {
     if (this.userServ.isAuthenticated()) {
       return true;
     }
-    this.router.navigate(['/auth/login'], { queryParams: { originalUrl: state.url }});
+    this.router.navigate(['/login'], { queryParams: { originalUrl: state.url }});
     return false;
   }
 

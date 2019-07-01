@@ -9,3 +9,21 @@
 @import '~@ionic/angular/css/text-alignment.css';
 @import '~@ionic/angular/css/text-transformation.css';
 @import '~@ionic/angular/css/flex-utils.css';
+
+.center {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.no-background {
+  background: transparent !important;
+  --ion-background-color: transparent !important;
+  --background: transparent !important;
+  input:-internal-autofill-selected {
+      background-color: none !important;
+      background-image: none !important;
+      color: rgb(0, 0, 0) !important;
+  }
+}
