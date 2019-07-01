@@ -11,17 +11,23 @@ import { AppRoutingModule } from './app-routing.module';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { environment } from '../environments/environment';
 import { HttpClientModule } from '@angular/common/http';
+import { NativeStorage } from '@ionic-native/native-storage/ngx';
+
 
 @NgModule({
   declarations: [AppComponent],
   entryComponents: [],
-  imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule, ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production }), 
-  HttpClientModule,],
+  imports: [
+      BrowserModule, IonicModule.forRoot(), AppRoutingModule,
+      ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production }),
+      HttpClientModule
+  ],
   providers: [
     StatusBar,
     SplashScreen,
-    { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
+    { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
+    NativeStorage
   ],
-  bootstrap: [AppComponent]
+  bootstrap: [ AppComponent ]
 })
 export class AppModule {}

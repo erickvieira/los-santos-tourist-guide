@@ -1,4 +1,6 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { NavController } from '@ionic/angular';
+import {LoginService} from "../../login/login.service";
 
 @Component({
   selector: 'app-toolbar-menu',
@@ -9,12 +11,17 @@ export class ToolbarMenuComponent implements OnInit {
 
   @Output() onSelectCategory = new EventEmitter();
 
-  constructor() { }
+  constructor(private navCtrl: NavController,
+              private loginService: LoginService) { }
 
   ngOnInit() {}
 
   onGetPoints(categoryName: string) {
     this.onSelectCategory.emit({'category': categoryName});
+  }
+
+  addTouristSpot() {
+    return this.navCtrl.navigateRoot('/home/add');
   }
 
 }

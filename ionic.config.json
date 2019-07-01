@@ -1,5 +1,7 @@
 {
   "name": "los-santos-tourist-guide",
-  "integrations": {},
+  "integrations": {
+    "cordova": {}
+  },
   "type": "angular"
 }

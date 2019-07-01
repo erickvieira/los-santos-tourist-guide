@@ -1,6 +1,8 @@
 import { Component, OnInit, Input } from '@angular/core';
+import { ModalController, NavController } from '@ionic/angular';
 import { TouristSpotService } from './tourist-spot.service';
 import { TouristSpot } from '../../../functions/src/models/tourist-spot';
+import { AddComponent } from './add/add.component';
 
 @Component({
   selector: 'app-home',
