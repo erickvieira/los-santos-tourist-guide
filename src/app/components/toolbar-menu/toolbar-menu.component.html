@@ -3,7 +3,9 @@
     <ion-buttons slot="start">
       <ion-button (click)="emitCategory(category)" (press)="details(category)" 
         *ngFor="let category of categories">
-        <ion-icon slot="icon-only" [name]="icons[category]" 
+        <ion-icon slot="icon-only" 
+          [ngClass]="currentCategory === category ? 'glow' : ''" 
+          [name]="icons[category]" 
           [title]="labels[category]"></ion-icon>
       </ion-button>
     </ion-buttons>

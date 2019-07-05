@@ -21,7 +21,7 @@ export class LoginPage implements OnInit {
     private router: Router,
   ) { }
 
-  ngOnInit() {
+  async ngOnInit() {
     this.loginForm = this.formBuilder.group({
       email: ['', [
         Validators.required,
@@ -32,6 +32,9 @@ export class LoginPage implements OnInit {
         Validators.minLength(5)
       ]]
     });
+    if (this.userServ.isAuthenticated()) {
+      await this.router.navigateByUrl('/home');
+    }
   }
 
   async login() {
@@ -41,7 +44,8 @@ export class LoginPage implements OnInit {
       const userData = await this.userServ.login(email, btoa(password)).toPromise();
       localStorage.setItem('currentUser', JSON.stringify(userData));
       loading.dismiss();
-      this.router.navigateByUrl('/home');
+      await this.router.navigateByUrl('/home');
+      window.location.reload();
     } catch (error) {
       loading.dismiss();
       this.intServ.presentGenericAlert({

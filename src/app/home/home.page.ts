@@ -3,6 +3,8 @@ import { TouristSpotService } from '../services/tourist-spot.service';
 import { TouristSpot } from '../../../functions/src/models/tourist-spot';
 import { easyInOutVer } from '../models/animations';
 import { InteractionService } from '../services/interaction.service';
+import { Router } from '@angular/router';
+import { UserService } from '../services/user.service';
 
 @Component({
   selector: 'app-home',
@@ -17,10 +19,13 @@ export class HomePage implements OnInit {
   showFilters = false;
   spots: TouristSpot[] = null;
   currentCategory: string;
+  firstTime = true;
 
   constructor(
+    private userServ: UserService,
     private spotServ: TouristSpotService,
     private intServ: InteractionService,
+    private router: Router,
   ) {}
 
   ngOnInit() {
@@ -28,10 +33,21 @@ export class HomePage implements OnInit {
   }
 
   getAll() {
+    if (!this.firstTime) {
+      return;
+    }
     this.spotServ.getList().subscribe((data) => {
       this.spots = data;
+    }, _ => {
+      this.intServ.presentGenericAlert({
+        header: 'Oops',
+        message: `Unexpected error occurred`
+      });
     });
-    this.currentCategory = undefined;
+    if (this.currentCategory) {
+      this.firstTime = false;
+      this.currentCategory = undefined;
+    }
   }
 
   async onSelectCategory(category: string) {
@@ -60,11 +76,15 @@ export class HomePage implements OnInit {
     this.intServ.presentGenericAlert({
       header: 'Los Santos Tourist Guide',
       subHeader: 'How to use',
-      message: `You can tap on filter button (on top right corner) 
+      message: `You can tap on filter button (on top right corner)
       and select a category to filter the pins.<br>
       When it's returns values, the map will reload with the new pins.<br>
       Otherwise, it will present a error message.`
     });
+  }
+
+  async logout() {
+    this.userServ.logout();
   }
 
 }

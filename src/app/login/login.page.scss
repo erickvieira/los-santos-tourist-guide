@@ -17,6 +17,13 @@
   z-index: 9999;
 }
 
+ion-label {
+  ion-icon {
+    position: relative;
+    top: .15em;
+  }
+}
+
 .backdrop {
   background: rgba(255, 255, 255, 0.5);
   height: 100%;

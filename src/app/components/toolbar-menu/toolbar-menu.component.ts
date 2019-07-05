@@ -11,9 +11,11 @@ export class ToolbarMenuComponent implements OnInit {
 
   @Output('on-select-category') onSelectCategory = new EventEmitter<string>();
   
-  readonly categories = categoriesToArray();
+  readonly categories = categoriesToArray().sort();
   readonly icons = {};
   readonly labels = {};
+
+  currentCategory = undefined;
 
   constructor(
     private intServ: InteractionService,
@@ -24,6 +26,7 @@ export class ToolbarMenuComponent implements OnInit {
   }
 
   emitCategory(category: string) {
+    this.currentCategory = category;
     this.onSelectCategory.emit(this.labels[category]);
   }
 

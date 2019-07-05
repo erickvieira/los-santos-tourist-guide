@@ -1,4 +1,4 @@
-POST http://localhost:5000/los-santos-tourist-guide/us-central1/tgapi/createDatabase HTTP/1.1
+POST https://us-central1-los-santos-tourist-guide.cloudfunctions.net/tgapi/createDatabase HTTP/1.1
 # POST https://us-central1-los-santos-tourist-guide.cloudfunctions.net/tgapi/createDatabase HTTP/1.1
 Content-Type: application/json
 
@@ -38,46 +38,46 @@ Content-Type: application/json
   }]
 }
 
-GET http://localhost:5000/los-santos-tourist-guide/us-central1/tgapi HTTP/1.1
+GET https://us-central1-los-santos-tourist-guide.cloudfunctions.net/tgapi HTTP/1.1
 
-GET http://localhost:5000/los-santos-tourist-guide/us-central1/tgapi/user/-Li64jzsrgSfRblkp8rY HTTP/1.1
+GET https://us-central1-los-santos-tourist-guide.cloudfunctions.net/tgapi/user/-Li64jzsrgSfRblkp8rY HTTP/1.1
 
-GET http://localhost:5000/los-santos-tourist-guide/us-central1/tgapi/spot HTTP/1.1
+GET https://us-central1-los-santos-tourist-guide.cloudfunctions.net/tgapi/spot HTTP/1.1
 
-GET http://localhost:5000/los-santos-tourist-guide/us-central1/tgapi/spot/-dfsdflkmdkfm HTTP/1.1
+GET https://us-central1-los-santos-tourist-guide.cloudfunctions.net/tgapi/spot/-dfsdflkmdkfm HTTP/1.1
 
 POST https://us-central1-los-santos-tourist-guide.cloudfunctions.net/tgapi/spot HTTP/1.1
 Content-Type: application/json
 
 {
-  "name": "San Sebastian Drug Store",
+  "name": "Santa Monica Racetrack",
   "description": "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Rerum repellat iure eligendi autem impedit corrupti fugiat repudiandae incidunt, aspernatur dignissimos totam deleniti eaque qui ab eveniet beatae obcaecati asperiores enim!",
-  "adjacentStreets": ["President Homer Street"],
+  "adjacentStreets": ["Roma Street"],
   "icon": "none",
   "ticketPrice": "free",
   "allowsPhotography": true,
-  "hasMetalDetector": true,
-  "categories": [ "private area", "socializing", "health care" ],
+  "hasMetalDetector": false,
+  "categories": [ "private area", "racing", "fun", "sport" ],
   "businessHours": [{ "day": "sun", "opensAt": "08:00", "closesAt": "19:00" }],
-  "coordinates": { "lat": 33.720438367872944, "lng": -118.80352197875976 }
+  "coordinates": { "lat": 33.73000412, "lng": -118.81712614 }
 }
 
-DELETE http://localhost:5000/los-santos-tourist-guide/us-central1/tgapi/spot/-dfsdflkmdkfm HTTP/1.1
+DELETE https://us-central1-los-santos-tourist-guide.cloudfunctions.net/tgapi/spot/-dfsdflkmdkfm HTTP/1.1
 
-PATCH http://localhost:5000/los-santos-tourist-guide/us-central1/tgapi/spot/-LiASICI520_pTpziRd4 HTTP/1.1
+PATCH https://us-central1-los-santos-tourist-guide.cloudfunctions.net/tgapi/spot/-LiASICI520_pTpziRd4 HTTP/1.1
 Content-Type: application/json
 
 {
   "ticketPrice": "free"
 }
 
-GET http://localhost:5000/los-santos-tourist-guide/us-central1/tgapi/spot/category/public%20area HTTP/1.1
+GET https://us-central1-los-santos-tourist-guide.cloudfunctions.net/tgapi/spot/category/public%20area HTTP/1.1
 
 GET https://us-central1-los-santos-tourist-guide.cloudfunctions.net/tgapi HTTP/1.1
 
 GET https://us-central1-los-santos-tourist-guide.cloudfunctions.net/tgapi/user/-Li64jzsrgSfRblkp8rY HTTP/1.1
 
-GET http://localhost:5000/los-santos-tourist-guide/us-central1/tgapi/user/-Li64jzsrgSfRblkp8rY/ratings HTTP/1.1
+GET https://us-central1-los-santos-tourist-guide.cloudfunctions.net/tgapi/user/-Li64jzsrgSfRblkp8rY/ratings HTTP/1.1
 
 POST https://us-central1-los-santos-tourist-guide.cloudfunctions.net/tgapi/login HTTP/1.1
 Content-Type: application/json

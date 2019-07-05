@@ -1,8 +1,6 @@
 /// <reference types="@types/googlemaps" />
 import { Component, OnInit, Input, ElementRef, ViewChild, SimpleChanges } from '@angular/core';
-import { Coordinates } from 'functions/src/models/coordinates';
 import { TinyTouristSpot } from 'functions/src/models/tourist-spot';
-import { InteractionService } from 'src/app/services/interaction.service';
 import { TouristSpotService } from 'src/app/services/tourist-spot.service';
 
 @Component({
@@ -20,21 +18,17 @@ export class LivemapComponent implements OnInit {
   // tslint:disable-next-line:member-ordering
   @ViewChild('map') mapElement: ElementRef;
   map: any;
+  private readonly mapCenter = { lat: 33.738177, lng: -118.813650 };
 
   markers: google.maps.Marker[] = [];
-
-  points = [
-    { lat: 33.738177, lng: -118.813650 },
-    { lat: 33.738877, lng: -118.827654 }
-  ]
 
   constructor(private spotServ: TouristSpotService) { }
 
   ngOnInit() {
     google.maps.event.addDomListener(window, 'load', () => {
       this.map = new google.maps.Map(this.mapElement.nativeElement, {
-        zoom: 14,
-        center: { lat: 33.738177, lng: -118.813650 },
+        zoom: 13,
+        center: this.mapCenter,
         mapTypeId: google.maps.MapTypeId.ROADMAP,
         fullscreenControl: false,
         zoomControl: false,
@@ -59,6 +53,8 @@ export class LivemapComponent implements OnInit {
           m.setMap(null);
         });
         this.markers = [];
+        this.map.setCenter(this.mapCenter);
+        this.map.setZoom(13);
       }
       this.spots.forEach(async s => {
         const marker = new google.maps.Marker({
@@ -109,13 +105,13 @@ export class LivemapComponent implements OnInit {
         <div style="display: flex;">
           <div style="flex: 2">Ticket:</div>
           <div style="flex: 2; text-align: right; color: #666">
-            <b>${typeof full.ticketPrice === 'string' ? full.ticketPrice : 'US$' + Math.floor(full.ticketPrice).toFixed(2) || 'unknown'}</b>
+            <b>${typeof full.ticketPrice === 'string' ? full.ticketPrice : 'US$\t' + Math.floor(full.ticketPrice).toFixed(2) || 'unknown'}</b>
           </div>
         </div>
         <div style="width: 100%; text-align: center; margin-top: 5px">
-          <i>
-            <small>${full.categories.join(' / ')}</small>
-          </i>
+          <small style="background-color: #7044ff; padding: 1px 4px; border-radius: 3px; color: white; box-shadow: 0px 0px 8    px 0px #7044ffa3;">
+            ${full.categories.join(' 🞄 ')}
+          </small>
         </div>
       </div>
     `;

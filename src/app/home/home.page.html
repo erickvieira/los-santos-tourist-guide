@@ -1,7 +1,13 @@
 <ion-header>
   <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-button (click)="logout()" routerLink="/login">
+        <ion-icon name="log-out" 
+          slot="icon-only"></ion-icon>
+      </ion-button>
+    </ion-buttons>
     <ion-title>
-      Los Santos Tourist Guide
+      LSTG
       <ion-chip>
         <ion-text color="light">
           {{ currentCategory || 'all categories' }}
@@ -26,9 +32,16 @@
     img="../../assets/imgs/los-santos.svg"
     [spots]="spots">
   </overlay-map>
-  <ion-fab vertical="bottom" horizontal="end" slot="fixed">
-    <ion-fab-button color="dark" (click)="help()">
-      <ion-icon name="help-circle" color="light"></ion-icon>
+  <ion-fab vertical="bottom" horizontal="end" slot="fixed" 
+    style="bottom: 15px; right: 15px;">
+    <ion-fab-button color="primary" (click)="help()">
+      <ion-icon name="help" color="light"></ion-icon>
     </ion-fab-button>
   </ion-fab>
 </ion-content>
+
+<div class="backdrop" *ngIf="!spots || spots.length === 0">
+  <span class="center">
+    <ion-spinner name="bubbles" color="primary"></ion-spinner>
+  </span>
+</div>

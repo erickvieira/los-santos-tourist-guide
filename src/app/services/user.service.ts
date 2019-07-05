@@ -41,6 +41,11 @@ export class UserService {
     );
   }
 
+  logout() {
+    localStorage.removeItem('currentUser');
+    this._instance = undefined;
+  }
+
   register(user: IUser) {
     return this.http.post(
       `${baseUrl}/register`,

@@ -21,7 +21,7 @@ export class AuthGuardService implements CanActivateChild {
     if (this.userServ.isAuthenticated()) {
       return true;
     }
-    this.router.navigate(['/login'], { queryParams: { originalUrl: state.url }});
+    this.router.navigate(['/login']);
     return false;
   }
 

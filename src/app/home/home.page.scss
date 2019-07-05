@@ -1,4 +1,17 @@
 overlay-map {
-  width: 100vw;
+  z-index: 9999 !important;
+  width: 100vw !important;
+  height: 100vh !important;
+}
+
+.backdrop {
+  position: absolute;
   height: 100%;
+  width: 100%;
+  z-index: 99999;
+  .center {
+    ion-spinner {
+      transform: scale(2);
+    }
+  }
 }
