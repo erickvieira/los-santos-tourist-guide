@@ -5,6 +5,8 @@ import { easyInOutVer } from '../models/animations';
 import { InteractionService } from '../services/interaction.service';
 import { Router } from '@angular/router';
 import { UserService } from '../services/user.service';
+import { ModalController } from '@ionic/angular';
+import { AddSpotComponent } from '../tourist-spots/add-spot/add-spot.component';
 
 @Component({
   selector: 'app-home',
@@ -25,6 +27,7 @@ export class HomePage implements OnInit {
     private userServ: UserService,
     private spotServ: TouristSpotService,
     private intServ: InteractionService,
+    private modalController: ModalController,
     private router: Router,
   ) {}
 
@@ -81,6 +84,14 @@ export class HomePage implements OnInit {
       When it's returns values, the map will reload with the new pins.<br>
       Otherwise, it will present a error message.`
     });
+  }
+
+  async add() {
+    const modal = await this.modalController.create({
+      component: AddSpotComponent,
+      animated: true
+    });
+    return await modal.present();
   }
 
   async logout() {

@@ -1,0 +1,43 @@
+<ion-header translucent>
+  <ion-toolbar>
+    <ion-title>Adicionar Ponto Turístico</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="dismissModal()">
+        <ion-icon name="close"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <form onsubmit="processForm(event)">
+    <ion-list lines="none">
+      <form [formGroup]="addSpotForm" (ngSubmit)="addSpot()">
+        <ion-item>
+          <ion-label position="floating" color="primary">Name</ion-label>
+          <ion-input formControlName="name" type="text"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label position="floating" color="primary">Categories</ion-label>
+          <ion-select formControlName="categories" multiple interface="popover">
+            <ion-select-option *ngFor="let categorie of categoriesList" value="categorie.name">{{ categorie.name }}</ion-select-option>
+          </ion-select>
+        </ion-item>
+        <ion-item>
+          <ion-label position="floating" color="primary">Latitude</ion-label>
+          <ion-input formControlName="lat" type="text"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label position="floating" color="primary">Longitude</ion-label>
+          <ion-input formControlName="lng" type="text"></ion-input>
+        </ion-item>
+        <ion-button type="submit" expand="block" [disabled]="!addSpotForm.valid">
+          <ion-label>
+            Adicionar
+            <ion-icon name="add" slot="start"></ion-icon>
+          </ion-label>
+        </ion-button>
+      </form>
+    </ion-list>
+  </form>
+</ion-content>

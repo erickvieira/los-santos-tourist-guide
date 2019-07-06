@@ -28,16 +28,26 @@
 </app-toolbar-menu>
 
 <ion-content>
+
   <overlay-map 
     img="../../assets/imgs/los-santos.svg"
     [spots]="spots">
   </overlay-map>
+
+  <ion-fab vertical="bottom" horizontal="end" slot="fixed" 
+    style="bottom: 80px; right: 15px;">
+    <ion-fab-button color="secondary" (click)="add()">
+      <ion-icon name="add" color="light"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+  
   <ion-fab vertical="bottom" horizontal="end" slot="fixed" 
     style="bottom: 15px; right: 15px;">
-    <ion-fab-button color="primary" (click)="help()">
+    <ion-fab-button color="tertiary" (click)="help()">
       <ion-icon name="help" color="light"></ion-icon>
     </ion-fab-button>
   </ion-fab>
+
 </ion-content>
 
 <div class="backdrop" *ngIf="!spots || spots.length === 0">

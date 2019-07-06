@@ -1,8 +1,9 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { IonicModule } from '@ionic/angular';
-import { FormsModule } from '@angular/forms';
+
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
+import { IonicModule } from '@ionic/angular';
 
 import { HomePage } from './home.page';
 import { LivemapModule } from '../components/livemap/livemap.module';
@@ -17,6 +18,7 @@ import { ToolbarMenuComponent } from '../components/toolbar-menu/toolbar-menu.co
   imports: [
     CommonModule,
     FormsModule,
+    ReactiveFormsModule,
     IonicModule,
     LivemapModule,
     RouterModule.forChild([
