@@ -2,7 +2,8 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { TouristSpot } from '../../../functions/src/models/tourist-spot';
-import { baseUrl } from '../models/constants';
+import { baseUrl, jsonRequest } from '../models/constants';
+import { IUser } from 'functions/src/models/user';
 
 @Injectable({
   providedIn: 'root',
@@ -29,6 +30,18 @@ export class TouristSpotService {
     return this.http.get(
       `${baseUrl}/spot/${spotId}/ratings`
     );
+  }
+
+  register(user: IUser) {
+    return this.http.post(
+      `${baseUrl}/register`,
+      user,
+      { headers: jsonRequest }
+    );
+  }
+
+  add(spot: TouristSpot) {
+    return this.http.post(`${baseUrl}/spot/`, spot, { headers: jsonRequest });
   }
 
 }

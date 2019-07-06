@@ -6,6 +6,7 @@ import { InteractionService } from 'src/app/services/interaction.service';
 import { Router } from '@angular/router';
 
 import CategoriesList from '../../models/categoriesList';
+import { TouristSpotService } from 'src/app/services/tourist-spot.service';
 
 @Component({
   selector: 'app-add-spot',
@@ -20,6 +21,7 @@ export class AddSpotComponent implements OnInit {
   constructor(
     private formBuilder: FormBuilder,
     private userServ: UserService,
+    private tourSpotService: TouristSpotService,
     private interServ: InteractionService,
     private router: Router,
     public modalCtrl: ModalController) { }
@@ -33,6 +35,10 @@ export class AddSpotComponent implements OnInit {
         Validators.required,
         Validators.minLength(5)
       ]],
+      description: ['', [
+        Validators.required,
+        Validators.minLength(5)
+      ]],
       categories: ['', [
         Validators.required
       ]],
@@ -41,7 +47,13 @@ export class AddSpotComponent implements OnInit {
       ]],
       lng: ['', [
         Validators.required
-      ]]
+      ]],
+      capability: ['', [
+        Validators.required
+      ]],
+      ticket: ['', [
+        Validators.required
+      ]],
     });
     if (this.userServ.isAuthenticated()) {
       await this.router.navigateByUrl('/home');
@@ -49,7 +61,9 @@ export class AddSpotComponent implements OnInit {
   }
 
   async addSpot() {
-    const loading = await this.interServ.presentGenericLoading();
+    // const loading = await this.interServ.presentGenericLoading();
+    const spot = await this.tourSpotService.add(this.addSpotForm.value).toPromise();
+    console.log(spot);
   }
 
   dismissModal() {

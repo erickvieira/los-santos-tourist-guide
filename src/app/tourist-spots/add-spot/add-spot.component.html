@@ -18,11 +18,16 @@
           <ion-input formControlName="name" type="text"></ion-input>
         </ion-item>
         <ion-item>
+          <ion-label position="floating" color="primary">Description</ion-label>
+          <ion-input formControlName="description" type="text"></ion-input>
+        </ion-item>
+        <ion-item>
           <ion-label position="floating" color="primary">Categories</ion-label>
           <ion-select formControlName="categories" multiple="true" interface="popover">
             <ion-select-option *ngFor="let categorie of categoriesList" [value]="categorie.name">{{ categorie.name }}</ion-select-option>
           </ion-select>
         </ion-item>
+        <hr>
         <ion-item>
           <ion-label position="floating" color="primary">Latitude</ion-label>
           <ion-input formControlName="lat" type="text"></ion-input>
@@ -30,6 +35,15 @@
         <ion-item>
           <ion-label position="floating" color="primary">Longitude</ion-label>
           <ion-input formControlName="lng" type="text"></ion-input>
+        </ion-item>
+        <hr>
+        <ion-item>
+          <ion-label position="floating" color="primary">Capability</ion-label>
+          <ion-input formControlName="capability" type="text"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label position="floating" color="primary">Ticket</ion-label>
+          <ion-input formControlName="ticket" type="text"></ion-input>
         </ion-item>
         <ion-button type="submit" expand="block" [disabled]="!addSpotForm.valid">
           <ion-label>
