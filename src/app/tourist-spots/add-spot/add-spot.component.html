@@ -1,6 +1,6 @@
 <ion-header translucent>
   <ion-toolbar>
-    <ion-title>Adicionar Ponto Turístico</ion-title>
+    <ion-title>Add Tourist Spot</ion-title>
     <ion-buttons slot="end">
       <ion-button (click)="dismissModal()">
         <ion-icon name="close"></ion-icon>
@@ -45,9 +45,10 @@
           <ion-label position="floating" color="primary">Ticket</ion-label>
           <ion-input formControlName="ticket" type="text"></ion-input>
         </ion-item>
+        
         <ion-button type="submit" expand="block" [disabled]="!addSpotForm.valid">
           <ion-label>
-            Adicionar
+            Add
             <ion-icon name="add" slot="start"></ion-icon>
           </ion-label>
         </ion-button>

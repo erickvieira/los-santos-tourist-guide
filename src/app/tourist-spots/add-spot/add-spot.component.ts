@@ -62,8 +62,8 @@ export class AddSpotComponent implements OnInit {
 
   async addSpot() {
     // const loading = await this.interServ.presentGenericLoading();
-    const spot = await this.tourSpotService.add(this.addSpotForm.value).toPromise();
-    console.log(spot);
+    // const spot = await this.tourSpotService.add(this.addSpotForm.value).toPromise();
+    // console.log(spot);
   }
 
   dismissModal() {
