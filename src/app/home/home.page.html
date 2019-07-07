@@ -1,13 +1,7 @@
 <ion-header>
   <ion-toolbar color="primary">
-    <ion-buttons slot="start">
-      <ion-button (click)="logout()" routerLink="/login">
-        <ion-icon name="log-out" 
-          slot="icon-only"></ion-icon>
-      </ion-button>
-    </ion-buttons>
     <ion-title>
-      LSTG
+      <span>LSTG</span>
       <ion-chip>
         <ion-text color="light">
           {{ currentCategory || 'all categories' }}
@@ -17,6 +11,13 @@
     <ion-buttons slot="end">
       <ion-button (click)="showFilters = !showFilters; showFilters ? undefined : getAll()">
         <ion-icon [name]="showFilters ? 'close' : 'funnel'" 
+          slot="icon-only"></ion-icon>
+      </ion-button>
+      <ion-button *ngIf="userServ.isAuthenticated" (click)="editUser()">
+        <ion-icon name="contact"></ion-icon>
+      </ion-button>
+      <ion-button (click)="logout()" routerLink="/login">
+        <ion-icon name="log-out" 
           slot="icon-only"></ion-icon>
       </ion-button>
     </ion-buttons>
@@ -37,7 +38,7 @@
   <ion-fab *ngIf="userServ.instance.role === 'admin'" 
     vertical="bottom" horizontal="end" slot="fixed" 
     style="bottom: 80px; right: 15px;">
-    <ion-fab-button color="secondary" (click)="add()">
+    <ion-fab-button color="secondary" (click)="addTouristSpot()">
       <ion-icon name="add" color="light"></ion-icon>
     </ion-fab-button>
   </ion-fab>

@@ -1,35 +1,30 @@
 import { Component, OnInit } from '@angular/core';
 import { ModalController } from '@ionic/angular';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { Validators, FormGroup, FormBuilder } from '@angular/forms';
 import { UserService } from 'src/app/services/user.service';
-import { InteractionService } from 'src/app/services/interaction.service';
 import { Router } from '@angular/router';
 
-import CategoriesList from '../../models/categoriesList';
-import { TouristSpotService } from 'src/app/services/tourist-spot.service';
-
 @Component({
-  selector: 'app-add-spot',
-  templateUrl: './add-spot.component.html',
-  styleUrls: ['./add-spot.component.scss'],
+  selector: 'app-edit',
+  templateUrl: './edit.component.html',
+  styleUrls: ['./edit.component.scss'],
 })
-export class AddSpotComponent implements OnInit {
+export class EditComponent implements OnInit {
 
-  public addSpotForm: FormGroup;
-  public categoriesList = CategoriesList;
+  editing: boolean;
+  editUserForm: FormGroup;
 
   constructor(
+    public modalCtrl: ModalController,
     private formBuilder: FormBuilder,
     private userServ: UserService,
-    private tourSpotService: TouristSpotService,
-    private interServ: InteractionService,
-    private router: Router,
-    public modalCtrl: ModalController) { }
-
-  // name: string; categories: string[]; coordinates: Coordinates;
+    private router: Router
+  ) {}
 
   async ngOnInit() {
-    this.addSpotForm = this.formBuilder.group({
+    this.editing = false;
+
+    this.editUserForm = this.formBuilder.group({
       name: ['', [
         Validators.required,
         Validators.minLength(5)
@@ -59,9 +54,8 @@ export class AddSpotComponent implements OnInit {
     }
   }
 
-  async addSpot() {
-    // const loading = await this.interServ.presentGenericLoading();
-    const spot = await this.userServ.createTouristspot(this.addSpotForm.value).toPromise();
+  onEdit() {
+    this.editing = true;
   }
 
   dismissModal() {

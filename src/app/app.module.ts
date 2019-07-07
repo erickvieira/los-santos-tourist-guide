@@ -15,6 +15,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { UserService } from './services/user.service';
 import { TouristSpotsModule } from './tourist-spots/tourist-spots.module';
 import { FormsModule } from '@angular/forms';
+import { UsersModule } from './users/users.module';
 
 @NgModule({
   declarations: [AppComponent],
@@ -27,7 +28,8 @@ import { FormsModule } from '@angular/forms';
     ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production }),
     HttpClientModule,
     BrowserAnimationsModule,
-    TouristSpotsModule
+    TouristSpotsModule,
+    UsersModule
   ],
   providers: [
     StatusBar,

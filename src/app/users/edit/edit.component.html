@@ -1,0 +1,48 @@
+<ion-header translucent>
+  <ion-toolbar>
+    <ion-title>Profile</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="dismissModal()">
+        <ion-icon name="close"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+  <ion-list lines="none" *ngIf="editing">
+    <form [formGroup]="addSpotForm" (ngSubmit)="addSpot()">
+      <ion-item>
+        <ion-label position="floating" color="primary">Name</ion-label>
+        <ion-input formControlName="name" type="text"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label position="floating" color="primary">Email</ion-label>
+        <ion-input formControlName="description" type="text"></ion-input>
+      </ion-item>
+      <ion-button type="submit" expand="block">
+        <ion-label>Save
+          <ion-icon name="checkmark" slot="start"></ion-icon>
+        </ion-label>
+      </ion-button>
+    </form>
+  </ion-list>
+
+
+  <ion-list *ngIf="!editing">
+    <ion-item>
+      <ion-label position="floating" color="primary">Name</ion-label>
+      <ion-input disabled formControlName="name" type="text"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="floating" color="primary">Email</ion-label>
+      <ion-input disabled formControlName="description" type="text"></ion-input>
+    </ion-item>
+    <ion-button type="submit" expand="block" (click)="onEdit()">
+      <ion-label>Edit
+        <ion-icon name="checkmark" slot="start"></ion-icon>
+      </ion-label>
+    </ion-button>
+  </ion-list>
+</ion-content>

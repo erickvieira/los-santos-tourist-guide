@@ -8,6 +8,8 @@ import { UserService } from '../services/user.service';
 import { ModalController } from '@ionic/angular';
 import { AddSpotComponent } from '../tourist-spots/add-spot/add-spot.component';
 
+import { EditComponent } from '../users/edit/edit.component';
+
 @Component({
   selector: 'app-home',
   templateUrl: 'home.page.html',
@@ -86,9 +88,17 @@ export class HomePage implements OnInit {
     });
   }
 
-  async add() {
+  async addTouristSpot() {
     const modal = await this.modalController.create({
       component: AddSpotComponent,
+      animated: true
+    });
+    return await modal.present();
+  }
+
+  async editUser() {
+    const modal = await this.modalController.create({
+      component: EditComponent,
       animated: true
     });
     return await modal.present();

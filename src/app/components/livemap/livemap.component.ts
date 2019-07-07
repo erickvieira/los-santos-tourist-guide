@@ -86,6 +86,10 @@ export class LivemapComponent implements OnInit {
     }
   }
 
+  edit() {
+    alert('edit');
+  }
+
   async buildMapLabel(spotId: string) {
     const full = await this.spotServ.details(spotId).toPromise();
     return `
@@ -105,11 +109,13 @@ export class LivemapComponent implements OnInit {
         <div style="display: flex;">
           <div style="flex: 2">Ticket:</div>
           <div style="flex: 2; text-align: right; color: #666">
-            <b>${typeof full.ticketPrice === 'string' ? full.ticketPrice : 'US$\t' + Math.floor(full.ticketPrice).toFixed(2) || 'unknown'}</b>
+            <b>${typeof full.ticketPrice === 'string' ? full.ticketPrice : 'US$\t' +
+             Math.floor(full.ticketPrice).toFixed(2) || 'unknown'}</b>
           </div>
         </div>
         <div style="width: 100%; text-align: center; margin-top: 5px">
-          <small style="background-color: #7044ff; padding: 1px 4px; border-radius: 3px; color: white; box-shadow: 0px 0px 8    px 0px #7044ffa3;">
+          <small style="background-color: #7044ff; padding: 1px 4px;
+           border-radius: 3px; color: white; box-shadow: 0px 0px 8px 0px #7044ffa3;">
             ${full.categories.join(' 🞄 ')}
           </small>
         </div>

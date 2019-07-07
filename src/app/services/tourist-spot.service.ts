@@ -40,8 +40,4 @@ export class TouristSpotService {
     );
   }
 
-  add(spot: TouristSpot) {
-    return this.http.post(`${baseUrl}/spot/`, spot, { headers: jsonRequest });
-  }
-
 }
