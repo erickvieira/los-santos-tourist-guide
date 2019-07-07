@@ -8,11 +8,11 @@ export class User implements IUser {
   active: boolean;
   password: string;
 
-  constructor( name, email, password, profilePicture = null ) {
-      this.name = name;
-      this.email = email;
-      this.password = password;
-      this.role = 'admin';
-      this.active = true;
-    }
+  constructor(name, email, password?) {
+    this.name = name;
+    this.email = email;
+    this.password = password;
+    this.role = 'admin';
+    this.active = true;
+  }
 }

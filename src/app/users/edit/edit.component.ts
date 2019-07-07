@@ -4,6 +4,7 @@ import { Validators, FormGroup, FormBuilder } from '@angular/forms';
 import { UserService } from 'src/app/services/user.service';
 import { Router } from '@angular/router';
 import { InteractionService } from 'src/app/services/interaction.service';
+import { User } from 'src/app/models/user';
 
 @Component({
   selector: 'app-edit',
@@ -21,7 +22,7 @@ export class EditComponent implements OnInit {
     private userServ: UserService,
     private intServ: InteractionService,
     private router: Router
-  ) {}
+  ) { }
 
   async ngOnInit() {
     this.editing = false;
@@ -49,7 +50,7 @@ export class EditComponent implements OnInit {
     const loading = await this.intServ.presentGenericLoading();
     const { name, email } = this.editUserForm.value;
     // @TODO
-    // const user = new User(name, email);
+    const user = new User(name, email);
     try {
       const userData = await this.userServ.register(user).toPromise();
       loading.dismiss();
