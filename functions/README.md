@@ -50,7 +50,7 @@ API Base | https://us-central1-los-santos-tourist-guide.cloudfunctions.net/tgapi
 
 ### Models Details
 
-* User
+* TouristSpot
 	```js
 	{
 		name: string;
@@ -126,7 +126,7 @@ API Base | https://us-central1-los-santos-tourist-guide.cloudfunctions.net/tgapi
 
 * Acessibility (Enum) - Must be one of them:
 
-| Categories |
+| Acessibility |
 | ------ |
 | ACCESS_RAMP |
 | AUDIO_DESCRIPTION |
