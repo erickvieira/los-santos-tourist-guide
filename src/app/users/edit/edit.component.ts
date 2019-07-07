@@ -3,6 +3,7 @@ import { ModalController } from '@ionic/angular';
 import { Validators, FormGroup, FormBuilder } from '@angular/forms';
 import { UserService } from 'src/app/services/user.service';
 import { Router } from '@angular/router';
+import { InteractionService } from 'src/app/services/interaction.service';
 
 @Component({
   selector: 'app-edit',
@@ -18,6 +19,7 @@ export class EditComponent implements OnInit {
     public modalCtrl: ModalController,
     private formBuilder: FormBuilder,
     private userServ: UserService,
+    private intServ: InteractionService,
     private router: Router
   ) {}
 
@@ -29,25 +31,10 @@ export class EditComponent implements OnInit {
         Validators.required,
         Validators.minLength(5)
       ]],
-      description: ['', [
+      email: ['', [
         Validators.required,
         Validators.minLength(5)
-      ]],
-      categories: ['', [
-        Validators.required
-      ]],
-      lat: ['', [
-        Validators.required
-      ]],
-      lng: ['', [
-        Validators.required
-      ]],
-      capability: ['', [
-        Validators.required
-      ]],
-      ticket: ['', [
-        Validators.required
-      ]],
+      ]]
     });
     if (this.userServ.isAuthenticated()) {
       await this.router.navigateByUrl('/home');
@@ -56,6 +43,26 @@ export class EditComponent implements OnInit {
 
   onEdit() {
     this.editing = true;
+  }
+
+  async onSave() {
+    const loading = await this.intServ.presentGenericLoading();
+    const { name, email } = this.editUserForm.value;
+    // @TODO
+    // const user = new User(name, email);
+    try {
+      const userData = await this.userServ.register(user).toPromise();
+      loading.dismiss();
+      await this.router.navigateByUrl('/login');
+      window.location.reload();
+    } catch (error) {
+      loading.dismiss();
+      this.intServ.presentGenericAlert({
+        header: 'Oops!',
+        subHeader: 'Can\'t register you',
+        message: 'Ops. Something goes wrong'
+      });
+    }
   }
 
   dismissModal() {

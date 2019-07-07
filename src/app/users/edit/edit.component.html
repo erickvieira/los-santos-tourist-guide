@@ -12,16 +12,16 @@
 <ion-content>
 
   <ion-list lines="none" *ngIf="editing">
-    <form [formGroup]="addSpotForm" (ngSubmit)="addSpot()">
+    <form [formGroup]="editUserForm" (ngSubmit)="editUserForm()">
       <ion-item>
         <ion-label position="floating" color="primary">Name</ion-label>
-        <ion-input formControlName="name" type="text"></ion-input>
+        <ion-input formControlName="name" type="text" [value]="userServ.instance.name"></ion-input>
       </ion-item>
       <ion-item>
         <ion-label position="floating" color="primary">Email</ion-label>
-        <ion-input formControlName="description" type="text"></ion-input>
+        <ion-input formControlName="email" type="text" [value]="userServ.instance.email"></ion-input>
       </ion-item>
-      <ion-button type="submit" expand="block">
+      <ion-button type="submit" expand="block" [disabled]="!editUserForm.valid" expand="block">
         <ion-label>Save
           <ion-icon name="checkmark" slot="start"></ion-icon>
         </ion-label>
@@ -33,11 +33,11 @@
   <ion-list *ngIf="!editing">
     <ion-item>
       <ion-label position="floating" color="primary">Name</ion-label>
-      <ion-input disabled formControlName="name" type="text"></ion-input>
+      <ion-input disabled formControlName="name" [value]="userServ.instance.name" type="text"></ion-input>
     </ion-item>
     <ion-item>
       <ion-label position="floating" color="primary">Email</ion-label>
-      <ion-input disabled formControlName="description" type="text"></ion-input>
+      <ion-input disabled formControlName="email" [value]="userServ.instance.email" type="text"></ion-input>
     </ion-item>
     <ion-button type="submit" expand="block" (click)="onEdit()">
       <ion-label>Edit

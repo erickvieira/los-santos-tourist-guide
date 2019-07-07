@@ -3,7 +3,7 @@
   <ion-card class="center login-box">
     <ion-card-header style="text-align: right">
       <ion-card-subtitle>Los Santos Tourist Guide</ion-card-subtitle>
-      <ion-card-title>Sing in</ion-card-title>
+      <ion-card-title>Sign in</ion-card-title>
     </ion-card-header>
     <ion-card-content>
       <ion-list lines="none">
@@ -29,6 +29,8 @@
               <ion-icon name="log-in" slot="start"></ion-icon>
             </ion-label>
           </ion-button>
+
+          <ion-button color="light" [routerLink]="['/register']">Join Us</ion-button>
         </form>
       </ion-list>
     </ion-card-content>
