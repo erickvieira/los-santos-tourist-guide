@@ -69,7 +69,7 @@ export class UserService {
   }
 
   delete(id: string) {
-    if (this.instance.role === 'admin') {
+    if (this.instance.role !== 'admin') {
       throw { message: 'you must be an administrator to delete users' };
     }
     return this.http.delete(
@@ -78,7 +78,7 @@ export class UserService {
   }
 
   promote(id: string) {
-    if (this.instance.role === 'admin') {
+    if (this.instance.role !== 'admin') {
       throw { message: 'you must be an administrator to promote users' };
     }
     return this.http.post(
@@ -88,7 +88,7 @@ export class UserService {
   }
 
   demote(id: string) {
-    if (this.instance.role === 'admin') {
+    if (this.instance.role !== 'admin') {
       throw { message: 'you must be an administrator to demote users' };
     }
     return this.http.post(
@@ -98,7 +98,8 @@ export class UserService {
   }
 
   createTouristspot(spot: ITouristSpot) {
-    if (this.instance.role === 'admin') {
+    if (this.instance.role !== 'admin') {
+      console.log(this.instance);
       throw { message: 'you must be an administrator to create touristspots' };
     }
     return this.http.post(
@@ -109,7 +110,7 @@ export class UserService {
   }
 
   deleteTouristspot(spotId: string) {
-    if (this.instance.role === 'admin') {
+    if (this.instance.role !== 'admin') {
       throw { message: 'you must be an administrator to delete touristspots' };
     }
     return this.http.delete(
@@ -118,7 +119,7 @@ export class UserService {
   }
 
   updateTouristspot(spotId: string, spot: TouristSpot | Partial<TouristSpot>) {
-    if (this.instance.role === 'admin') {
+    if (this.instance.role !== 'admin') {
       throw { message: 'you must be an administrator to update touristspots' };
     }
     return this.http.patch(
