@@ -49,10 +49,10 @@ export class AddSpotComponent implements OnInit {
       lng: ['', [
         Validators.required
       ]],
-      maxCapacity: [0.0, [
+      maxCapability: ['', [
         Validators.required
       ]],
-      ticketPrice: [0.0, [
+      ticketPrice: ['', [
         Validators.required
       ]],
     });
