@@ -1,3 +1,5 @@
+import { ITouristSpot } from 'functions/src/models/tourist-spot';
+import { Coordinates } from './../../../../functions/src/models/coordinates';
 import { Component, OnInit } from '@angular/core';
 import { ModalController } from '@ionic/angular';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
@@ -47,10 +49,10 @@ export class AddSpotComponent implements OnInit {
       lng: ['', [
         Validators.required
       ]],
-      capability: ['', [
+      maxCapacity: [0.0, [
         Validators.required
       ]],
-      ticket: ['', [
+      ticketPrice: [0.0, [
         Validators.required
       ]],
     });
@@ -61,7 +63,38 @@ export class AddSpotComponent implements OnInit {
 
   async addSpot() {
     // const loading = await this.interServ.presentGenericLoading();
-    const spot = await this.userServ.createTouristspot(this.addSpotForm.value).toPromise();
+    let { name, description, categories, lat, lng, maxCapacity, ticketPrice } = this.addSpotForm.value;
+
+    let businessHours = {
+      day: 'mon',
+      opensAt: '08:00',
+      closesAt: '18:00'
+    };
+
+    let coordinates = {
+      lat: lat,
+      lng: lng
+    }
+
+    let touristSpot = {
+      name: name,
+      description: description,
+      adjacentStreets: [],
+      icon: '',
+      maxCapacity: maxCapacity,
+      ticketPrice: ticketPrice,
+      allowsPet: false,
+      allowsPhotography: false,
+      hasMetalDetector: false,
+      categories: categories,
+      accessibilityItems: [],
+      businessHours: null,
+      coordinates: coordinates,
+      rating: null,
+      ageGroup: null
+    };
+
+    const spot = await this.userServ.createTouristspot(touristSpot).toPromise();
   }
 
   dismissModal() {
@@ -71,3 +104,19 @@ export class AddSpotComponent implements OnInit {
   }
 
 }
+
+// name: string;
+// description: string;
+// adjacentStreets: string[];
+// icon: string;
+// maxCapacity ?: number;
+// ticketPrice: number | 'free';
+// allowsPet ?: boolean;
+// allowsPhotography ?: boolean;
+// hasMetalDetector ?: boolean;
+// categories: Categories[];
+// accessibilityItems ?: Accessibility[];
+// businessHours: BusinessHours[]; day: Weekday; opensAt: string; closesAt: string;
+// coordinates: Coordinates;
+// rating ?: TinyRating[];
+// ageGroup ?: AgeGroup[];
