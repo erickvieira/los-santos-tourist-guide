@@ -26,7 +26,7 @@ export class HomePage implements OnInit {
   firstTime = true;
 
   constructor(
-    private userServ: UserService,
+    public userServ: UserService,
     private spotServ: TouristSpotService,
     private intServ: InteractionService,
     private modalController: ModalController,

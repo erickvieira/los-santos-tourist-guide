@@ -43,7 +43,7 @@ export class RegisterPage implements OnInit {
   async register() {
     const loading = await this.intServ.presentGenericLoading();
     const { name, email, password } = this.registerForm.value;
-    const user = new User(name, email, password);
+    const user = new User(name, email, btoa(password));
     try {
       const userData = await this.userServ.register(user).toPromise();
       loading.dismiss();
